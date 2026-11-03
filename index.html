@@ -171,6 +171,15 @@ details.steps-panel p{margin-bottom:8px}
 .rev-q{font-weight:500;margin-bottom:6px}
 .rev-why{color:var(--ink-2)}
 .score{font:700 72px/1 var(--display);letter-spacing:.01em}
+.q3{margin:16px 0;padding:14px 16px;border:1px solid var(--ink);border-radius:6px;background:var(--surface)}
+.q3-h{font:700 18px/1.2 var(--display);text-transform:uppercase;letter-spacing:.02em;margin-bottom:6px}
+.q3 dl{margin:0}
+.q3 dt{font-weight:600;margin-top:10px}
+.q3 dd{margin:2px 0 0;max-width:66ch}
+.stop{margin:18px 0;padding:12px 14px;background:var(--accent-soft);border-radius:6px}
+.stop summary{cursor:pointer;font-weight:600;min-height:32px}
+.stop-a{padding-top:8px;max-width:66ch}
+.why-s{font-size:15px;background:var(--teacher);color:var(--teacher-ink);padding:8px 10px;border-radius:4px;max-width:66ch}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -210,7 +219,49 @@ function P(x){ return {t:'p',x:x}; }
 function UL(items){ return {t:'ul',items:items}; }
 function OL(items){ return {t:'ol',items:items}; }
 function TB(head,rows){ return {t:'table',head:head,rows:rows}; }
-function F(x){ return {t:'f',x:x}; }
+var Q3_FORMULAS=[
+{k:'Total from a uniform load',q:{letters:'w = load per foot (lb/ft). L = length of the beam (ft). The answer is the total load in lb.',why:'The same load sits on every foot, so you repeat it once for each foot. Repeating an amount is multiplying.',next:'Use the total to find the reactions. For an even load on a simple beam, each support takes half of it.'}},
+{k:'f = P ÷ A',q:{letters:'f = stress (psi). P = load (lb). A = area (sq in).',why:'Stress is how much force lands on each square inch. You divide because the total force is shared over the area.',next:'Compare f to the allowable stress. If f is too high, make the area bigger or use a stronger material.'}},
+{k:'Example, LRFD',q:{letters:'D = dead load. L = live load. 1.2 and 1.6 are factors that scale each load up before they are added.',why:'Live load is less certain than dead load. You know the wall weight closely, but not how many people will use the room. The bigger factor covers that gap.',next:'Compare the total to the member’s strength. Check every combination. The one with the biggest result governs.'}},
+{k:'Lr = L0',q:{letters:'L0 = starting roof live load (20 psf for an ordinary roof). R1 = area reduction. R2 = slope reduction.',why:'Each R is 1 or less, so multiplying shrinks the starting load by that share. Big areas and steep roofs are less likely to carry the full load.',next:'Keep the answer between 12 and 20 psf. Then use Lr in the load combinations (Lesson 1.7).'}},
+{k:'L = L0 ×',q:{letters:'L0 = starting live load (psf). KLL = element factor from Table 1.4. AT = tributary area (sq ft).',why:'As the area grows, 15 ÷ √(KLL × AT) gets smaller, so the reduction grows. The 0.25 part never goes away, so some live load always stays on the member.',next:'Check the floor minimum: 0.5 × L0 for one floor, or 0.4 × L0 for two or more. Use whichever is bigger.'}},
+{k:'Moment = Force',q:{letters:'Force = push or pull (lb). Distance = straight-line distance from the pivot (ft). Moment = turning effect (ft-lb).',why:'A force twists more the farther out it acts, like a longer wrench handle. Double the distance and you double the twist. So you multiply.',next:'Add up the moments about the same point. If they balance, the beam does not turn (Lesson 2.2).'}},
+{k:'R1 = P × b',q:{letters:'P = load (lb). L = span, support to support (ft). a = distance from the left support to the load. b = distance from the load to the right support.',why:'R1 uses b because we take moments about the right support. The load’s lever from that support is b, so R1 × L = P × b.',next:'Check that R1 + R2 = P. Then use R1 and R2 to draw the shear diagram (Lesson 2.5).'}},
+{k:'V = sum of vertical',q:{letters:'V = shear (lb). Up is positive and down is negative.',why:'Cut the beam. Each piece has to balance on its own, so the vertical force at the cut equals the net force on one side of it.',next:'Use V at many points to draw the shear diagram. The shear shows where the moment peaks.'}},
+{k:'M = (reaction',q:{letters:'M = bending moment at the cut (ft-lb). Reaction and load = forces to the left of the cut. Distance = distance from the cut to each force.',why:'Each force on the left has a lever to the cut, so each makes a moment. Reactions push up and bend the left piece one way (sag, positive). Loads push down and bend it the other way, so they subtract.',next:'Repeat at many cuts to draw the moment diagram. Check one cut from the right side. You should get the same answer.'}},
+{k:'Slope of the moment',q:{letters:'Slope = how steep the moment line is. V = shear (lb).',why:'Move one foot to the right. The moment changes by the shear force times that one foot. Force times distance, so the slope equals V.',next:'Check your diagram: where V is positive, the moment line climbs. Where V is negative, it falls. The peak is where V = 0.'}},
+{k:'fb = M ÷ S',q:{letters:'fb = bending stress (psi). M = moment in in-lb (ft-lb × 12). S = section modulus (in³), a measure of how well the shape resists bending.',why:'The moment is the twisting load and S is how well the shape resists it. Dividing turns the load into stress in the fibers. Depth counts most, because fibers far from the middle carry the most stress and that distance is squared.',next:'Compare fb to the allowable stress in your code or material table. If fb is higher, use a bigger section or a stronger material.'}}
+];
+function F(x){
+  var q3=null;
+  for(var i=0;i<Q3_FORMULAS.length;i++){ if(x.indexOf(Q3_FORMULAS[i].k)===0){ q3=Q3_FORMULAS[i].q; break; } }
+  return {t:'f',x:x,q3:q3};
+}
+function Q3B(title,q){ return {t:'q3',title:title,q:q}; }
+function PIC(m,parts,cap){ return {t:'pic',m:m,parts:parts,cap:cap}; }
+function SVGFIG(svg,cap){ return {t:'svgfig',svg:svg,cap:cap}; }
+var SEESAW_SVG='<svg viewBox="0 0 640 200" role="img" aria-label="Seesaw: 100 lb at 6 ft and 50 lb at 12 ft from the pivot"><rect x="60" y="106" width="520" height="8" style="fill:var(--ink)"/><polygon points="304,190 336,190 320,114" style="fill:var(--ink-2)"/><rect x="182" y="58" width="60" height="48" style="fill:var(--surface);stroke:var(--ink)" stroke-width="2"/><text x="212" y="88" text-anchor="middle" class="svg-val">100 lb</text><rect x="506" y="58" width="60" height="48" style="fill:var(--surface);stroke:var(--ink)" stroke-width="2"/><text x="536" y="88" text-anchor="middle" class="svg-val">50 lb</text><line x1="212" y1="164" x2="320" y2="164" style="stroke:var(--ink-2)" stroke-width="1.5"/><line x1="320" y1="164" x2="536" y2="164" style="stroke:var(--ink-2)" stroke-width="1.5"/><text x="266" y="158" text-anchor="middle" class="svg-lab">6 ft</text><text x="428" y="158" text-anchor="middle" class="svg-lab">12 ft</text></svg>';
+var BEND_SVG='<svg viewBox="0 0 640 225" role="img" aria-label="Sagging beam: top squeezed, bottom stretched, neutral axis in the middle"><path d="M60 60 Q320 180 580 60 L580 80 Q320 200 60 80 Z" style="fill:var(--surface);stroke:var(--ink)" stroke-width="2"/><path d="M60 70 Q320 190 580 70" fill="none" style="stroke:var(--ink-2)" stroke-width="1.5" stroke-dasharray="6 5"/><text x="320" y="36" text-anchor="middle" class="svg-val" style="fill:var(--shear)">Top: squeezed (compression)</text><text x="320" y="200" text-anchor="middle" class="svg-val" style="fill:var(--moment)">Bottom: stretched (tension)</text><text x="60" y="220" class="svg-lab">dashed line = neutral axis</text></svg>';
+var STOP={
+'1-1':{q:'A floor carries 40 psf. Why do we multiply by area instead of adding it?',a:'Because psf means 40 pounds in every square foot. Each square foot adds 40 lb, so the total is 40 times the number of square feet. Adding would mix pounds and square feet.'},
+'1-2':{q:'Wind is also a push. Why does it get its own letter?',a:'Wind pushes sideways on walls and up or down on roofs. It comes in gusts and its direction changes, so the code checks it separately from dead load.'},
+'1-3':{q:'If a column fails, what happens to the beams sitting on it?',a:'The load they carried has nowhere to go. The load path is broken, so the beams drop and the damage can spread to the floors above.'},
+'1-4':{q:'The beam carries 400 lb on each foot. Why is the total 5,600 lb and not 400 lb?',a:'400 lb sits on every foot. A 14 ft beam has 14 feet, so the 400 happens 14 times: 400 × 14 = 5,600 lb.'},
+'1-5':{q:'Why does a cantilever need a stronger connection at the wall than a simple beam needs at its supports?',a:'A simple beam’s supports only push up. A cantilever’s wall has to hold the turning effect of the whole beam as well as the push, so the connection has to resist a twist.'},
+'1-6':{q:'If I double the area, why does the stress go down by half?',a:'Stress = force ÷ area. The same force now spreads over twice as many square inches, so each square inch carries half as much.'},
+'1-7':{q:'Why multiply the live load by 1.6 but the dead load by only 1.2?',a:'Live load is less certain. You know the weight of the walls closely, but not how many people will be in the room. The bigger factor covers that uncertainty.'},
+'1-8':{q:'Why does a bigger roof area get a smaller live load?',a:'It is unlikely that every square foot of a large area is loaded at the same time. The code allows a smaller load for big areas.'},
+'2-1':{q:'Two kids balance on a seesaw when their moments match. Why not when their weights match?',a:'The turning effect is weight times distance from the pivot. A heavier kid close to the pivot can match a lighter kid who sits farther out.'},
+'2-2':{q:'Why do we use ΣV and ΣM here but not ΣH?',a:'This beam has no sideways loads, so ΣH = 0 gives no new information. Both unknowns are vertical, so the two vertical equations are enough.'},
+'2-3':{q:'Why does a load close to the left end make R1 large?',a:'The left support is close to the load, so it takes most of the weight. The right support is farther away and takes less.'},
+'2-4':{q:'Why does shear jump at a point load but slope along a uniform load?',a:'A point load removes its force at one spot, so the line jumps. A uniform load removes force a little at each foot, so the line slopes.'},
+'2-5':{q:'Why does the shear line have to come back to zero at the right support?',a:'The beam is in balance. Everything pushing up and down has to cancel, so after the last support the total shear must be zero.'},
+'3-1':{q:'Why does the top squeeze when the bottom stretches? Aren’t they the same bend?',a:'They are two sides of one bend. A bent beam must get shorter on the inside of the curve and longer on the outside. The neutral axis in the middle does neither.'},
+'3-2':{q:'Why do reactions add but loads subtract?',a:'Reactions push up and bend the left piece one way (sag, positive). Loads push down and bend it the other way. They work against each other, so one is added and one is subtracted.'},
+'3-3':{q:'Why is the moment at its peak where the shear is zero?',a:'Shear is how fast the moment changes. At the peak the moment stops rising and has not started falling yet, so its rate of change is zero.'},
+'3-4':{q:'Why is the center moment for a point load PL/4 and not PL/2?',a:'Each support takes P/2, and the center is L/2 from each support. Turning effect is force × distance, so (P/2) × (L/2) = PL/4.'},
+'3-5':{q:'If I double the depth, why does the section modulus S go up 4 times?',a:'S uses depth squared. The fibers far from the middle carry the most stress, and a deeper beam pushes them farther out. Squaring the depth is what makes the change so large.'}
+};
 function EX(title,lines,end){ return {t:'ex',title:title,lines:lines,end:end||''}; }
 function TCH(x){ return {t:'teacher',x:x}; }
 function JOB(x){ return {t:'job',x:x}; }
@@ -376,6 +427,7 @@ var UNITS=[
     body:[
       F('Moment = Force × Distance'),
       P('The distance is the moment arm: the straight-line distance from the pivot to where the force acts. Units: ft-lb, lb-in or kip-ft. Use ft-lb in this course.'),
+      SVGFIG(SEESAW_SVG,'Balance check: 100 lb × 6 ft = 600 ft-lb on the left, and 50 lb × 12 ft = 600 ft-lb on the right. Equal turning, so it balances.'),
       EX('Seesaw',['Kid A: 100 lb sits 6 ft from the pivot. Moment = 100 × 6 = 600 ft-lb.','Kid B: 50 lb sits 12 ft from the pivot on the other side. Moment = 50 × 12 = 600 ft-lb.'],'Equal moments on both sides means a balanced seesaw.'),
       H('Three rules'),
       OL(['Always name the point you turn about. “Moment about A” is the only kind that means something.','Measure the distance straight out from that point.','Opposite turning directions get opposite signs. Pick one sign rule and keep it for the whole problem.']),
@@ -404,11 +456,16 @@ var UNITS=[
     body:[
       H('Steps'),
       OL(['Draw the beam. Label each support (R1, R2), each load, and every distance.','Take moments about one support. Its reaction drops out of the equation.','Solve for the other reaction.','Check: add all the vertical forces. They should cancel.']),
+      H('What “span” means'),
+      P('The span is the distance from one support to the other, column to column. It is not always the full length of the beam. Any part that sticks out past a support is an overhang, and it is not part of the span.'),
+      EX('Example',['A beam is 16 ft long. Its supports are 12 ft apart, so 4 ft sticks out past them.','Span L = <b>12 ft</b>. The 16 ft total length is not used in the reaction formulas.'],'Use the span in the formulas for loads between the supports. Loads on an overhang need their own check.'),
+      PIC({L:20,w:0,loads:[{P:4000,a:5}]},['beam'],'The 20 ft example used below, drawn to scale. The span runs from support to support.'),
       H('One point load shortcut'),
       F('R1 = P × b ÷ L        R2 = P × a ÷ L'),
       P('a = distance from the left support to the load. b = distance from the load to the right support. L = span. Also a + b = L.'),
       EX('Worked example',['20 ft beam. 4,000 lb load at 5 ft from the left end. So a = 5 and b = 15.','R2 = 4,000 × 5 ÷ 20 = <b>1,000 lb</b>','R1 = 4,000 × 15 ÷ 20 = <b>3,000 lb</b>'],'Check: 3,000 + 1,000 = 4,000 lb.'),
       TCH('The load closer to a support sends more of its weight into that support. The load is 5 ft from the left end, so the left support takes the bigger share.'),
+      ASK('What does “R1 × 24” mean?','R1 is a push up. 24 is the distance from that push to the point you are turning about. Push times distance is the twist that push makes about that point. Every moment has this same form: force × distance from one point.'),
       ASK('Why not just split the load in half?','Only a load at the center splits 50/50. Move the load and the split moves with it. The moment equation handles that.')
     ],
     check:CHK('A 4,000 lb load sits at the center of a 20 ft beam. What is R1?',['1,000 lb','2,000 lb','4,000 lb','8,000 lb'],1,'At the center each support takes half: 4,000 ÷ 2 = 2,000 lb.') },
@@ -434,6 +491,7 @@ var UNITS=[
     body:[
       H('The rules'),
       OL(['Start at the left support. V = R1.','At each point load, the line jumps down by the size of the load.','Along a uniform load, the line slopes down. The slope is the load per foot. A 400 lb/ft load drops the line 400 lb every foot.','Where there is no load, the line stays flat.','At the right support, the line jumps up by R2 and lands on zero. If it does not, a reaction is wrong.']),
+      PIC({L:12,w:0,loads:[{P:600,a:2},{P:1000,a:6}]},['beam','shear'],'The 12 ft example. The shear line drops at each load. It ends at −600 lb just before the right support, and R2 = 600 lb brings it back to zero.'),
       EX('Worked example (from your Day 2 slides)',['12 ft beam. R1 = 1,000 lb. A 600 lb load at 2 ft. A 1,000 lb load at 6 ft. R2 = 600 lb.','Left support: V = <b>1,000 lb</b>','After the 600 lb load at 2 ft: V = 1,000 − 600 = <b>400 lb</b>','After the 1,000 lb load at 6 ft: V = 400 − 1,000 = <b>−600 lb</b>','Right support: V = −600 + 600 (R2) = <b>0</b> ✓'],'Remember the spot where V goes from + to −. That is where the bending moment peaks (Unit 3).'),
       TCH('Walk left to right like reading. Down steps go down and up steps go up. If you do not finish at zero, you made a mistake.'),
       JOB('Shear diagrams tell the engineer where a beam needs the most vertical strength. The largest value sets the minimum for the web, the shear connection and the bearing at the support.')
@@ -448,6 +506,7 @@ var UNITS=[
     big:'A beam bends. When it bends, its top gets squeezed and its bottom gets stretched.',
     body:[
       P('Bend a ruler in your hands. The inside of the bend squeezes. The outside stretches. A beam does the same. Between the two is a line that neither squeezes nor stretches. Engineers call it the neutral axis.'),
+      SVGFIG(BEND_SVG,'A sagging beam. The top is squeezed and the bottom is stretched. The dashed line is the neutral axis: no squeeze and no stretch.'),
       H('Two signs'),
       TB(['Name','Shape','Top of the beam','Where it happens'],[
         ['Positive moment (sag)','Bows down in the middle, like a smile','Compression (squeezed)','Simple beams under load'],
@@ -497,6 +556,7 @@ var UNITS=[
         ['Cantilever, point load at the tip','M = P × L','At the wall'],
         ['Cantilever, uniform load','M = w × L² ÷ 2','At the wall']]),
       P('P = point load (lb). w = load per foot (lb/ft). L = span or cantilever length (ft). The answer is in ft-lb.'),
+      Q3B('Why the quick formulas work',{letters:'P = point load (lb). w = load per foot (lb/ft). L = span (ft).',why:'Each support takes P/2 of a point load at the center, and the center is L/2 from each support. So M = (P/2) × (L/2) = PL/4. A uniform load acts like one load of wL at the middle. Each support takes wL/2. At the center, that gives (wL/2) × (L/2), minus the left half of the load (wL/2) times its lever to the center (L/4). That is wL²/4 − wL²/8 = wL²/8.',next:'Use these numbers to check the peak of your full diagram. They must match.'}),
       EX('Worked example',['10 ft simple beam. 1,000 lb at the center.','M = 1,000 × 10 ÷ 4 = <b>2,500 ft-lb</b>'],'Your full diagram should peak at this same value. If it does not, something is wrong.'),
       TCH('Use the quick formula to get the number. Draw the full diagram to see the shape and where the moment sits.'),
       JOB('Estimators and early designers use these formulas for a first pass at beam sizes. Final sizing uses the full diagram and the code.')
@@ -530,6 +590,23 @@ function labelOf(r){
   return l ? 'Lesson '+l.id.replace('-','.')+': '+l.title : 'Start';
 }
 
+function Q3HTML(q,title){
+  return '<div class="q3"><div class="q3-h">'+(title||'Ask the three questions')+'</div><dl>'+
+    '<dt>1. What does each letter stand for?</dt><dd>'+q.letters+'</dd>'+
+    '<dt>2. Why this operation?</dt><dd>'+q.why+'</dd>'+
+    '<dt>3. What do I do with the answer next?</dt><dd>'+q.next+'</dd></dl></div>';
+}
+function picHTML(m,parts,cap){
+  var r=analyze(m), s='';
+  if(parts.indexOf('beam')>=0) s+=beamSVG(r);
+  if(parts.indexOf('shear')>=0) s+=shearSVG(r);
+  if(parts.indexOf('moment')>=0) s+=momentSVG(r);
+  return '<figure class="fig">'+s+'<figcaption>'+cap+'</figcaption></figure>';
+}
+function stopHTML(s){
+  return '<details class="stop"><summary>Stop and think: '+s.q+'</summary><div class="stop-a">'+s.a+'</div></details>';
+}
+
 /* ---------- lesson rendering ---------- */
 function blockHTML(b){
   switch(b.t){
@@ -538,7 +615,10 @@ function blockHTML(b){
     case 'ul': return '<ul class="list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>';
     case 'ol': return '<ol class="steps">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ol>';
     case 'table': return '<div class="scroll"><table class="tbl"><thead><tr>'+b.head.map(function(c){ return '<th scope="col">'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+b.rows.map(function(r){ return '<tr>'+r.map(function(c){ return '<td>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table></div>';
-    case 'f': return '<p class="m">'+b.x+'</p>';
+    case 'f': return '<p class="m">'+b.x+'</p>'+(b.q3?Q3HTML(b.q3,'Ask the three questions'):'');
+    case 'q3': return Q3HTML(b.q,b.title);
+    case 'pic': return picHTML(b.m,b.parts,b.cap);
+    case 'svgfig': return '<figure class="fig">'+b.svg+'<figcaption>'+b.cap+'</figcaption></figure>';
     case 'ex': return '<div class="example"><div class="ex-title">'+b.title+'</div>'+b.lines.map(function(l){ return '<div class="ex-line">'+l+'</div>'; }).join('')+(b.end?'<div class="ex-end">'+b.end+'</div>':'')+'</div>';
     case 'teacher': return '<div class="note teacher"><div class="note-label">Teacher says</div><div>'+b.x+'</div></div>';
     case 'job': return '<div class="note job"><div class="note-label">On the job</div><div>'+b.x+'</div></div>';
@@ -568,7 +648,7 @@ function lessonHTML(l){
   return '<article class="lesson">'+
     '<p class="eyebrow">Unit '+l.unit+' · Lesson '+l.id.replace('-','.')+' · '+n+' of '+LESSONS.length+(isDone(l.id)?' · Passed':'')+'</p>'+
     '<h1>'+l.title+'</h1>'+
-    '<p class="big">'+l.big+'</p>'+
+    '<p class="big">'+l.big+'</p>'+(STOP[l.id]?stopHTML(STOP[l.id]):'')+
     l.body.map(blockHTML).join('')+
     checkHTML(l.id,l.check,isDone(l.id))+
     pagerHTML(l)+
@@ -595,6 +675,7 @@ function homeHTML(){
   return '<section class="hero"><p class="eyebrow">Structural member behavior · Units 1 to 3, then a test</p>'+
     '<h1>Beam Load Trainer</h1>'+
     '<p class="lead">Start with what a load is. Then learn how a beam holds it, how it twists (moment), how it splits (shear), and how it bends. Each lesson ends with one check question. The final test covers all three units.</p>'+
+    '<p>This trainer teaches why, not just steps. Every formula comes with three questions: what each letter stands for, why this operation, and what to do with the answer next. Most lessons open with a stop-and-think question.</p>'+
     '<div class="actions"><a class="btn" href="'+href+'">'+txt+'</a><a class="btn ghost" href="#lab">Open the Beam Lab</a></div>'+
     '<p class="small">Lessons done: '+doneN+' of '+LESSONS.length+'.'+(store.bestPct!=null?' Best test score: '+store.bestPct+'%.':'')+'</p></section>'+
     '<section class="how" aria-label="How to use"><div><b>1 · Read</b><span>The big idea, then the steps. Teacher says boxes give the short version.</span></div><div><b>2 · Check</b><span>Answer the check question. A right answer marks the lesson done.</span></div><div><b>3 · Try</b><span>Use the Beam Lab to change the numbers and watch the diagrams move.</span></div></section>'+
@@ -731,19 +812,23 @@ function stepsHTML(r){
   if(w>0) sumT.push(fmt(w)+' × '+fmt(L)+'² ÷ 2');
   var downT=ls.map(function(l){ return fmt(l.P); });
   if(w>0) downT.push(fmt(w)+' × '+fmt(L));
-  h+='<p><b>Step 1. Find R2.</b> Moments about the left end: each load times its distance from the left end, then divide by the span.</p>';
+  h+='<p><b>Step 1. Find R2.</b> Moments about the left end: each load times its distance from the left end, added up, then divided by the span.</p>';
   h+='<p class="m">R2 = ('+(sumT.join(' + ')||'0')+') ÷ '+fmt(L)+' = <b>'+fmt(r.R2)+' lb</b></p>';
+  h+='<p class="why-s"><b>Why:</b> A load farther from the left end has a longer lever, so it twists the beam more. Force × distance measures that twist. R2 has to cancel all of it, and it acts '+fmt(L)+' ft from the left end. So R2 × '+fmt(L)+' = total twist. Divide by '+fmt(L)+' to get R2.</p>';
   h+='<p><b>Step 2. Find R1.</b> All the down loads, minus R2.</p>';
   h+='<p class="m">R1 = ('+(downT.join(' + ')||'0')+') − '+fmt(r.R2)+' = <b>'+fmt(r.R1)+' lb</b></p>';
+  h+='<p class="why-s"><b>Why:</b> The beam does not rise off its supports, so the two pushes up have to add up to the pushes down.</p>';
   h+='<p><b>Step 3. Check.</b> R1 + R2 = '+fmt(r.R1+r.R2)+' lb. Down loads = '+fmt(r.total)+' lb. '+(Math.abs(r.R1+r.R2-r.total)<0.5?'They match.':'They do not match. Check the numbers.')+'</p>';
   h+='<p><b>Step 4. Shear.</b> Start at R1. A point load drops the line by its size. Each foot of uniform load drops it by w.</p>';
   ls.forEach(function(l){
     h+='<p class="m">At '+fmt(l.a)+' ft: V just before = '+fmt(r.V(l.a))+' lb, V just after = '+fmt(r.V(l.a+1e-6))+' lb</p>';
   });
   h+='<p class="m">Biggest shear = '+fmt(Math.abs(r.maxV.v))+' lb, at a support.</p>';
+  h+='<p class="why-s"><b>Why:</b> Each load takes its weight off the force that is still holding up the piece to its left. So the shear drops by that load right at that spot.</p>';
   h+='<p><b>Step 5. Moment at each load.</b> M = R1 × x, minus each load to the left times its distance from x, minus w × x² ÷ 2.</p>';
   ls.forEach(function(l){ h+='<p class="m">M at '+fmt(l.a)+' ft = '+momentTerms(r,l.a)+'</p>'; });
   if(r.sag.m>0.5) h+='<p class="m">Biggest sag, at '+fmt(r.sag.x)+' ft: M = '+momentTerms(r,r.sag.x)+'</p>';
+  h+='<p class="why-s"><b>Why:</b> R1 × x is R1 times its lever to the cut. That is the twist from the left support. Loads between the support and the cut twist the other way, so they are subtracted. A line like “R1 × 24” is the same idea: the left push times its lever to the point you chose.</p>';
   h+='<p><b>Step 6. Read the diagrams.</b> The moment peaks where shear crosses zero. Positive = sag (top squeezed). Negative = hog (top stretched).</p>';
   if(ls.length===1&&w===0){
     var P=ls[0].P, a=ls[0].a;
@@ -855,11 +940,11 @@ function labHTML(){
     '<p class="big">Change any number. The reactions, the diagrams and the steps all update. Start from one of your slide examples.</p>'+
     '<div class="presets" role="group" aria-label="Start from a slide example">'+PRESETS.map(function(q,i){ return '<button type="button" class="chip" data-act="preset" data-i="'+i+'" aria-pressed="'+(i===0)+'">'+q.name+'</button>'; }).join('')+'</div>'+
     '<div class="w-fields">'+
-      labField('lab-L','Span L (ft)',p.L)+labField('lab-w','Uniform load w (lb/ft)',p.w)+
+      labField('lab-L','Span L (ft), support to support',p.L)+labField('lab-w','Uniform load w (lb/ft)',p.w)+
       labField('lab-p1','Load 1, P1 (lb)',p.p1)+labField('lab-a1','Load 1 at a1 (ft from left)',p.a1)+
       labField('lab-p2','Load 2, P2 (lb)',p.p2)+labField('lab-a2','Load 2 at a2 (ft from left)',p.a2)+
     '</div>'+
-    '<div class="w-out" id="lab-out"></div>'+
+    '<p class="w-note">Span = support to support, column to column. A part that sticks out past a support is not in the span.</p>'+'<div class="w-out" id="lab-out"></div>'+
     '<figure class="fig"><div id="lab-beam"></div><figcaption>The beam, its loads and its supports. Load arrows point down.</figcaption></figure>'+
     '<figure class="fig"><div id="lab-shear"></div><figcaption>Shear diagram. Up is positive.</figcaption></figure>'+
     '<figure class="fig"><div id="lab-mom"></div><figcaption>Bending moment diagram. Sag is positive and is drawn down, so the shape matches how the beam bends.</figcaption></figure>'+
