@@ -180,6 +180,15 @@ details.steps-panel p{margin-bottom:8px}
 .stop summary{cursor:pointer;font-weight:600;min-height:32px}
 .stop-a{padding-top:8px;max-width:66ch}
 .why-s{font-size:15px;background:var(--teacher);color:var(--teacher-ink);padding:8px 10px;border-radius:4px;max-width:66ch}
+[hidden]{display:none!important}
+.terms{margin:4px 0 14px}
+.tc-hint{font-size:14px;color:var(--ink-2);margin:0 0 6px}
+.tchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.tchip{font:600 15px var(--mono);min-width:44px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:0 0 12px;max-width:66ch}
+.tcard p{margin-bottom:6px}
+.tc-name{font:700 18px/1.2 var(--display);text-transform:uppercase;letter-spacing:.02em;margin-bottom:6px}
+.tc-unit{font:500 14px var(--mono);color:var(--ink-2);text-transform:none;letter-spacing:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -219,6 +228,52 @@ function P(x){ return {t:'p',x:x}; }
 function UL(items){ return {t:'ul',items:items}; }
 function OL(items){ return {t:'ol',items:items}; }
 function TB(head,rows){ return {t:'table',head:head,rows:rows}; }
+var EQ_TERMS={
+'Total from a uniform load':[
+ {s:'w',name:'Load per foot',unit:'lb/ft',what:'How much load sits on each foot of the beam.',why:'It is the spread-out load. The total comes from it.',used:'Multiply by the length to get the total load for the reactions.'},
+ {s:'L',name:'Length',unit:'ft',what:'How many feet the load runs along.',why:'The load repeats once for each foot, so more feet means more load.',used:'Times w gives the total load.'}],
+'f = P ÷ A':[
+ {s:'f',name:'Stress',unit:'psi',what:'How hard the material feels the load on each square inch.',why:'This is the answer. It tells you if the member is safe.',used:'Compare it to the allowable stress. If it is too high, use a bigger area.'},
+ {s:'P',name:'Load',unit:'lb',what:'The force the member carries.',why:'More load means more stress, in direct proportion.',used:'Divided by the area to get f.'},
+ {s:'A',name:'Area',unit:'sq in',what:'The size of the surface the force lands on.',why:'Dividing by area shares the force over the surface. Bigger area, smaller stress.',used:'Use A = P ÷ f to find the area you need.'}],
+'Example, LRFD':[
+ {s:'D',name:'Dead load',unit:'psf or lb',what:'The permanent weight of the building.',why:'It is known well, so it gets the smaller factor, 1.2.',used:'Multiplied by 1.2, then added to the other loads.'},
+ {s:'L',name:'Live load',unit:'psf or lb',what:'People, furniture and stored materials.',why:'It is less certain, so it gets the bigger factor, 1.6.',used:'Multiplied by 1.6, then added.'},
+ {s:'1.2, 1.6',name:'Load factors',unit:'none',what:'Multipliers that make each load bigger on purpose.',why:'They cover uncertainty. More uncertain load, bigger factor.',used:'The total is compared to the member’s strength.'}],
+'Lr = L0':[
+ {s:'L0',name:'Starting roof load',unit:'psf',what:'The roof live load before any reduction. It is 20 psf for an ordinary roof.',why:'It is the starting point. The factors can only make it smaller.',used:'Multiplied by R1 and R2.'},
+ {s:'R1',name:'Area factor',unit:'1 or less',what:'Shrinks the load for big areas.',why:'A big area is unlikely to be fully loaded at the same time.',used:'Multiplied into Lr.'},
+ {s:'R2',name:'Slope factor',unit:'1 or less',what:'Shrinks the load for steep roofs.',why:'Steep roofs shed load, so less load is counted.',used:'Multiplied into Lr.'}],
+'L = L0 ×':[
+ {s:'L0',name:'Starting live load',unit:'psf',what:'The live load before the reduction. Table 1.3 gives it.',why:'The reduction is a share of this number.',used:'Multiplied by the bracket.'},
+ {s:'KLL',name:'Element factor',unit:'none',what:'A number from Table 1.4 for the member type.',why:'Different members pick up load in different ways, so each has its own factor.',used:'Multiplied by AT inside the square root.'},
+ {s:'AT',name:'Tributary area',unit:'sq ft',what:'The floor area that the member picks up.',why:'More area means more load sharing, so the reduction grows.',used:'Multiplied by KLL under the square root.'}],
+'Moment = Force':[
+ {s:'Force',name:'Push or pull',unit:'lb',what:'The force acting on the beam.',why:'Half of the twist. Double the force, double the twist.',used:'Multiplied by the distance.'},
+ {s:'Distance',name:'Lever arm',unit:'ft',what:'How far the force acts from the point you turn about.',why:'The other half of the twist. A farther force is like a longer wrench handle.',used:'Multiplied by the force.'},
+ {s:'M',name:'Moment',unit:'ft-lb',what:'The turning effect about one point.',why:'Force × distance gives the twist.',used:'Add all moments about the same point. If they balance, the beam does not turn.'}],
+'R1 = P × b':[
+ {s:'P',name:'Load',unit:'lb',what:'The point load on the beam.',why:'It is the weight the two supports share.',used:'Multiplied by a or b, then divided by L, to get a reaction.'},
+ {s:'a',name:'Distance from left support',unit:'ft',what:'Where the load sits, measured from the left support.',why:'The closer the load is to the right support, the more the left support takes. So a goes into R2.',used:'Used in R2 = P × a ÷ L.'},
+ {s:'b',name:'Distance to right support',unit:'ft',what:'Where the load sits, measured to the right support.',why:'R1 uses b because we take moments about the right support. The lever from that support to the load is b.',used:'Used in R1 = P × b ÷ L.'},
+ {s:'L',name:'Span',unit:'ft',what:'The distance from one support to the other.',why:'It is the lever between the two supports, so the load is shared over it.',used:'Divide by it. Check that a + b = L.'},
+ {s:'R1, R2',name:'Reactions',unit:'lb',what:'The upward pushes from the supports.',why:'They hold the beam up, so together they equal the total load.',used:'R1 starts the shear diagram and the moment (R1 × x).'}],
+'V = sum of vertical':[
+ {s:'V',name:'Shear',unit:'lb',what:'The vertical force inside the beam at a cut.',why:'It is what one side of the cut needs to stay in balance.',used:'Drawn as the shear diagram. Where it crosses zero, the moment peaks.'}],
+'M = (reaction':[
+ {s:'M',name:'Bending moment',unit:'ft-lb',what:'The turning effect at the cut.',why:'It adds up the twists from everything on one side of the cut.',used:'The beam must be sized for its largest value (Lesson 3.5).'},
+ {s:'Reaction',name:'Upward push from a support',unit:'lb',what:'A reaction to the left of the cut.',why:'It pushes up, so it bends the left piece into a sag (positive).',used:'Multiplied by its distance to the cut, then added.'},
+ {s:'Load',name:'Load to the left of the cut',unit:'lb',what:'A load between the left end and the cut.',why:'It pushes down, so it works against the reactions and is subtracted.',used:'Multiplied by its distance to the cut, then subtracted.'},
+ {s:'Distance',name:'Lever to the cut',unit:'ft',what:'How far each force is from the cut.',why:'Force × distance is the twist. Farther forces twist more.',used:'Multiplied by the force.'}],
+'Slope of the moment':[
+ {s:'Slope',name:'Steepness of the moment line',unit:'ft-lb per ft',what:'How fast the moment changes as you move along the beam.',why:'Each foot you move adds the shear times one foot to the moment.',used:'Where the slope is zero (V = 0), the moment is at its peak.'},
+ {s:'V',name:'Shear',unit:'lb',what:'The shear at that point.',why:'It is the force that acts over each foot, so it sets the slope.',used:'Read from the shear diagram to draw the moment line.'}],
+'fb = M ÷ S':[
+ {s:'fb',name:'Bending stress',unit:'psi',what:'The stress from bending, at the outer fibers.',why:'This is the answer. It must stay under the allowable stress.',used:'Compare it to the allowable stress in your code or material table.'},
+ {s:'M',name:'Moment',unit:'in-lb',what:'The bending moment, changed from ft-lb (× 12).',why:'Stress is in pounds per square inch, so the feet become inches.',used:'Divided by S.'},
+ {s:'S',name:'Section modulus',unit:'in³',what:'A shape number that measures how well a cross-section resists bending.',why:'Depth is squared in S, so a deeper beam resists far more bending.',used:'Divides M to give fb.'}]
+};
+var TCOUNT=0;
 var Q3_FORMULAS=[
 {k:'Total from a uniform load',q:{letters:'w = load per foot (lb/ft). L = length of the beam (ft). The answer is the total load in lb.',why:'The same load sits on every foot, so you repeat it once for each foot. Repeating an amount is multiplying.',next:'Use the total to find the reactions. For an even load on a simple beam, each support takes half of it.'}},
 {k:'f = P ÷ A',q:{letters:'f = stress (psi). P = load (lb). A = area (sq in).',why:'Stress is how much force lands on each square inch. You divide because the total force is shared over the area.',next:'Compare f to the allowable stress. If f is too high, make the area bigger or use a stronger material.'}},
@@ -235,7 +290,9 @@ var Q3_FORMULAS=[
 function F(x){
   var q3=null;
   for(var i=0;i<Q3_FORMULAS.length;i++){ if(x.indexOf(Q3_FORMULAS[i].k)===0){ q3=Q3_FORMULAS[i].q; break; } }
-  return {t:'f',x:x,q3:q3};
+  var terms=null, ks=Object.keys(EQ_TERMS);
+  for(var j=0;j<ks.length;j++){ if(x.indexOf(ks[j])===0){ terms=EQ_TERMS[ks[j]]; break; } }
+  return {t:'f',x:x,q3:q3,terms:terms};
 }
 function Q3B(title,q){ return {t:'q3',title:title,q:q}; }
 function PIC(m,parts,cap){ return {t:'pic',m:m,parts:parts,cap:cap}; }
@@ -590,6 +647,15 @@ function labelOf(r){
   return l ? 'Lesson '+l.id.replace('-','.')+': '+l.title : 'Start';
 }
 
+function termsHTML(terms){
+  var base='tc'+(++TCOUNT);
+  var chips=terms.map(function(t,i){ return '<button type="button" class="chip tchip" data-act="term" data-id="'+base+'-'+i+'" aria-pressed="false" aria-controls="'+base+'-'+i+'">'+t.s+'</button>'; }).join('');
+  var cards=terms.map(function(t,i){
+    return '<div class="tcard" id="'+base+'-'+i+'" hidden><div class="tc-name">'+t.s+' = '+t.name+' <span class="tc-unit">('+t.unit+')</span></div>'+
+      '<p><b>What it is:</b> '+t.what+'</p><p><b>Why it is here:</b> '+t.why+'</p><p><b>What it is used for:</b> '+t.used+'</p></div>';
+  }).join('');
+  return '<div class="terms"><p class="tc-hint">Tap a letter to see what it stands for and why it is in this equation.</p><div class="tchips" role="group" aria-label="Letters in this equation">'+chips+'</div>'+cards+'</div>';
+}
 function Q3HTML(q,title){
   return '<div class="q3"><div class="q3-h">'+(title||'Ask the three questions')+'</div><dl>'+
     '<dt>1. What does each letter stand for?</dt><dd>'+q.letters+'</dd>'+
@@ -615,7 +681,7 @@ function blockHTML(b){
     case 'ul': return '<ul class="list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>';
     case 'ol': return '<ol class="steps">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ol>';
     case 'table': return '<div class="scroll"><table class="tbl"><thead><tr>'+b.head.map(function(c){ return '<th scope="col">'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+b.rows.map(function(r){ return '<tr>'+r.map(function(c){ return '<td>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table></div>';
-    case 'f': return '<p class="m">'+b.x+'</p>'+(b.q3?Q3HTML(b.q3,'Ask the three questions'):'');
+    case 'f': return '<p class="m">'+b.x+'</p>'+(b.terms?termsHTML(b.terms):'')+(b.q3?Q3HTML(b.q3,'Ask the three questions'):'');
     case 'q3': return Q3HTML(b.q,b.title);
     case 'pic': return picHTML(b.m,b.parts,b.cap);
     case 'svgfig': return '<figure class="fig">'+b.svg+'<figcaption>'+b.cap+'</figcaption></figure>';
@@ -920,11 +986,11 @@ function beamSVG(r){
 function labUpdate(){
   var out=document.getElementById('lab-out'); if(!out) return;
   var r=analyze(labModel());
-  out.innerHTML=kpi('Left reaction R1',fmt(r.R1)+' lb','Pushes up at the left support')+
-    kpi('Right reaction R2',fmt(r.R2)+' lb','Pushes up at the right support')+
-    kpi('Biggest shear',fmt(Math.abs(r.maxV.v))+' lb','Always at a support')+
-    kpi('Biggest sag moment',fmt(Math.max(0,r.sag.m))+' ft-lb',r.sag.m>0.5?'At '+fmt(r.sag.x)+' ft':'No sag')+
-    kpi('Biggest hog moment',r.hog.m<-0.5?fmt(r.hog.m)+' ft-lb':'None','Simple beams only sag')+
+  out.innerHTML=kpi('Left reaction R1',fmt(r.R1)+' lb','Used to start the shear diagram and to find moments.')+
+    kpi('Right reaction R2',fmt(r.R2)+' lb','Used to find R1: R1 = total load − R2.')+
+    kpi('Biggest shear',fmt(Math.abs(r.maxV.v))+' lb','Used to check shear at the support.')+
+    kpi('Biggest sag moment',fmt(Math.max(0,r.sag.m))+' ft-lb',r.sag.m>0.5?'At '+fmt(r.sag.x)+' ft. Used to size the beam.':'No sag')+
+    kpi('Biggest hog moment',r.hog.m<-0.5?fmt(r.hog.m)+' ft-lb':'None','Only overhangs and cantilevers hog. Simple beams sag.')+
     kpi('Shear crosses zero',r.zeros.length?'At '+fmt(r.zeros[0])+' ft':'Never','The moment peaks here');
   document.getElementById('lab-beam').innerHTML=beamSVG(r);
   document.getElementById('lab-shear').innerHTML=shearSVG(r);
@@ -1131,6 +1197,17 @@ document.addEventListener('click',function(e){
   if(act==='reset'){
     if(!resetArmed){ resetArmed=true; render(); return; }
     store={done:{}}; writeStore(); resetArmed=false; render(); return;
+  }
+  if(act==='term'){
+    var card=document.getElementById(t.getAttribute('data-id'));
+    if(!card) return;
+    var group=t.closest('.terms'), wasOpen=!card.hidden;
+    if(group){
+      group.querySelectorAll('.tcard').forEach(function(c){ c.hidden=true; });
+      group.querySelectorAll('.tchip').forEach(function(c){ c.setAttribute('aria-pressed','false'); });
+    }
+    if(!wasOpen){ card.hidden=false; t.setAttribute('aria-pressed','true'); }
+    return;
   }
   if(act==='preset'){
     var p=PRESETS[parseInt(t.getAttribute('data-i'),10)];
