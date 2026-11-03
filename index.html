@@ -1,0 +1,1088 @@
+<title>Beam Load Trainer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Design plan
+   Look: a drafting sheet. Steel-grey neutrals, one hi-vis orange for the thing to act on.
+   Type: Barlow Condensed for headings and labels, IBM Plex Sans to read, IBM Plex Mono for every number and formula.
+   Layout: course map on the left, the lesson, lab or test on the right. One column on phones. */
+:root{
+  --bg:#EEF0EC; --surface:#FFFFFF; --ink:#1B2227; --ink-2:#4D5A62; --line:#CFD6D3;
+  --accent:#C2410C; --accent-soft:#FBE7DB; --on-accent:#FFFFFF;
+  --shear:#1D5C99; --moment:#B0400E;
+  --ok:#23703A; --ok-soft:#E2F1E6; --bad:#B42318; --bad-soft:#FBE3DF;
+  --teacher:#E4EBF0; --teacher-ink:#243540; --code:#E5EBE8;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --text:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111517; --surface:#181E21; --ink:#E4E9E7; --ink-2:#A3AEB3; --line:#2C363A;
+    --accent:#FB923C; --accent-soft:#3A2619; --on-accent:#1A1209;
+    --shear:#84C0F2; --moment:#FB923C;
+    --ok:#6FCF86; --ok-soft:#173225; --bad:#FF8A80; --bad-soft:#3B1E1B;
+    --teacher:#1C2930; --teacher-ink:#D5E2EA; --code:#202A2E;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111517; --surface:#181E21; --ink:#E4E9E7; --ink-2:#A3AEB3; --line:#2C363A;
+  --accent:#FB923C; --accent-soft:#3A2619; --on-accent:#1A1209;
+  --shear:#84C0F2; --moment:#FB923C;
+  --ok:#6FCF86; --ok-soft:#173225; --bad:#FF8A80; --bad-soft:#3B1E1B;
+  --teacher:#1C2930; --teacher-ink:#D5E2EA; --code:#202A2E;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--text);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-wrap:break-word}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.05;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,8vw,58px);text-transform:uppercase;margin-bottom:14px}
+h2{font-size:30px;text-transform:uppercase;margin-bottom:8px}
+h3.sec-h{font-size:24px;text-transform:uppercase;letter-spacing:.02em;margin:30px 0 10px}
+p{margin:0 0 14px;max-width:66ch}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.eyebrow{font:600 13px/1.3 var(--text);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
+.lead,.big{font-size:19px;line-height:1.5;max-width:60ch}
+.big{font-weight:500;border-top:3px solid var(--accent);padding-top:14px;margin:4px 0 10px}
+.small{font-size:14px;color:var(--ink-2)}
+.mono{font-family:var(--mono)}
+.topbar{max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;padding:16px 0;border-bottom:2px solid var(--ink)}
+.brand{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:var(--ink);flex-wrap:wrap}
+.brand b{font:700 24px/1 var(--display);letter-spacing:.06em;text-transform:uppercase}
+.brand span{font-size:14px;color:var(--ink-2)}
+.prog{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-2)}
+.prog-bar{width:150px;max-width:40vw;height:8px;background:var(--line);overflow:hidden}
+.prog-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr);gap:44px;max-width:1120px;margin:0 auto;padding:26px 0 40px;align-items:start}
+main{min-width:0;max-width:720px;width:100%}
+.rail{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
+.rail-toggle{display:none}
+.rail-body{display:block}
+.rail-h{font:600 12px/1.3 var(--text);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin:20px 0 6px 8px}
+.rail ol{list-style:none;margin:0;padding:0}
+.rail a{display:flex;gap:10px;align-items:baseline;padding:7px 8px;color:var(--ink);text-decoration:none;border-radius:4px;font-size:15px;line-height:1.35}
+.rail a:hover{background:var(--surface)}
+.rail a.on{background:var(--accent-soft);font-weight:600}
+.rail-n{font:500 13px var(--mono);color:var(--ink-2);min-width:28px}
+.tick{margin-left:auto;color:var(--ok);font-weight:700}
+@media (max-width:819px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:14px;padding-top:14px}
+  .rail{position:static;max-height:none;overflow:visible}
+  .rail-toggle{display:flex;width:100%;justify-content:space-between;align-items:center;font:600 16px var(--text);padding:12px 14px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;cursor:pointer;min-height:44px}
+  .rail-body{display:none}
+  .rail.open .rail-body{display:block;margin-top:6px}
+}
+.foot{max-width:1120px;margin:0 auto;padding:0 0 28px;font-size:13px;color:var(--ink-2)}
+.hero{padding:6px 0 4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;font:600 16px var(--text);color:var(--on-accent);background:var(--accent);border:2px solid var(--accent);border-radius:6px;text-decoration:none;cursor:pointer;text-align:center;max-width:100%}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.linkbtn{font:500 14px var(--text);background:none;border:none;color:var(--ink-2);text-decoration:underline;cursor:pointer;padding:8px 0;min-height:44px}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0 8px;border-top:1px solid var(--line);padding-top:16px}
+.how div{display:grid;gap:4px;font-size:15px}
+.how b{font:700 20px/1.1 var(--display);text-transform:uppercase;letter-spacing:.03em}
+.how span{color:var(--ink-2)}
+.units{margin-top:22px}
+.ucard{border-top:2px solid var(--ink);padding:18px 0 22px}
+.ucard p{color:var(--ink-2)}
+.ulist{margin:0 0 14px;padding-left:18px;font-size:15px;color:var(--ink-2)}
+.reset{margin-top:10px}
+.note{padding:14px 16px;border-radius:6px;margin:18px 0}
+.note-label{font:600 13px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.teacher{background:var(--teacher);color:var(--teacher-ink)}
+.teacher .note-label{color:var(--teacher-ink)}
+.job{background:var(--surface);border:1px solid var(--line)}
+.job .note-label{color:var(--ink-2)}
+.m{display:block;font-family:var(--mono);font-size:15px;background:var(--code);padding:9px 12px;border-radius:4px;margin:6px 0 12px;overflow-x:auto;white-space:nowrap}
+code{font-family:var(--mono);font-size:.92em;background:var(--code);padding:1px 5px;border-radius:3px}
+.example{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:16px 18px;margin:18px 0}
+.ex-title{font:700 22px/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin-bottom:8px}
+.ex-line{padding:4px 0}
+.ex-end{margin-top:10px;color:var(--ink-2);font-size:15px}
+ol.steps{list-style:none;counter-reset:s;margin:14px 0;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:3px 0 10px 42px;max-width:66ch}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:600 15px/1 var(--mono)}
+ul.list{padding-left:20px;margin:0 0 14px}
+ul.list li{margin:4px 0;max-width:66ch}
+.scroll{overflow-x:auto;margin:14px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{font:600 12px/1.3 var(--text);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);vertical-align:bottom}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr.gov td{background:var(--accent-soft);font-weight:600}
+.check{margin:34px 0 8px;padding:20px;border:2px solid var(--ink);border-radius:6px;background:var(--surface)}
+.check h3{margin-top:0}
+.check-q{font-size:19px;font-weight:500;margin-bottom:14px}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;color:var(--ink);text-align:left;min-height:44px;padding:10px 14px;background:var(--bg);border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.sel,.opt[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ink)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok);font-weight:600}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);text-decoration:line-through}
+.opt:disabled{cursor:default}
+.fb{margin-top:14px}
+.fb p{margin-bottom:8px}
+.fb.good b{color:var(--ok)}
+.fb.bad b{color:var(--bad)}
+.why{border-bottom:1px solid var(--line);padding:8px 0}
+.why summary{cursor:pointer;font-weight:600;padding:6px 0;min-height:32px}
+.why-a{color:var(--ink-2);padding:4px 0 6px}
+.pager{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
+.widget{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;margin:18px 0}
+.w-head{font:700 22px/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin-bottom:6px}
+.w-note{font-size:14px;color:var(--ink-2);margin-bottom:12px}
+.w-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:14px}
+.fld{display:grid;gap:4px;font-size:14px;color:var(--ink-2);min-width:0}
+.fld > span{font-weight:600;color:var(--ink)}
+input[type=number],select{width:100%;min-width:0;min-height:44px;padding:8px 10px;font:500 16px var(--mono);color:var(--ink);background:var(--bg);border:1px solid var(--ink-2);border-radius:4px}
+.w-tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.w-tables h4{font:700 18px/1.2 var(--display);text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
+.w-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}
+.kpi{border-top:2px solid var(--ink);padding-top:8px;min-width:0}
+.kpi .k{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.kpi .v{font:500 21px/1.25 var(--mono);color:var(--ink);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:13px;color:var(--ink-2)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.chip{font:500 14px var(--text);min-height:40px;padding:7px 14px;color:var(--ink);background:transparent;border:1px solid var(--ink-2);border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fig{margin:16px 0;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow-x:auto}
+.fig svg{display:block;width:100%;min-width:520px;height:auto}
+.fig figcaption{font-size:14px;color:var(--ink-2);margin-top:8px}
+.svg-lab{font:500 15px var(--mono);fill:var(--ink-2)}
+.svg-val{font:600 15px var(--mono);fill:var(--ink)}
+details.steps-panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-top:16px}
+details.steps-panel > summary{cursor:pointer;font:700 18px var(--display);text-transform:uppercase;letter-spacing:.02em;min-height:32px}
+details.steps-panel > div{margin-top:10px}
+details.steps-panel p{margin-bottom:8px}
+.qbar{height:6px;background:var(--line);margin:14px 0 18px}
+.qbar i{display:block;height:100%;background:var(--accent)}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px}
+.numrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.numrow input{max-width:240px}
+.unit-l{font:500 16px var(--mono);color:var(--ink-2)}
+.rev{border-top:1px solid var(--line);padding:14px 0}
+.rev-n{font:600 13px var(--text);letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.rev.ok .rev-n{color:var(--ok)}
+.rev.miss .rev-n{color:var(--bad)}
+.rev-q{font-weight:500;margin-bottom:6px}
+.rev-why{color:var(--ink-2)}
+.score{font:700 72px/1 var(--display);letter-spacing:.01em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="topbar">
+  <a class="brand" href="#home"><b>Beam Load Trainer</b><span>Construction engineering</span></a>
+  <div class="prog" aria-live="polite"><span id="prog-text"></span><div class="prog-bar" aria-hidden="true"><i id="prog-fill"></i></div></div>
+</header>
+<div class="shell">
+  <nav class="rail" id="rail" aria-label="Course map"></nav>
+  <main id="view"></main>
+</div>
+<p class="foot">Built from your Day 1 (Force and Loads), Day 2 (Moments and Shear) and Day 4 (Bending) slides, 10-455-104. The teacher notes and worked answers are written for this trainer.</p>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- saved progress: per viewer, every access guarded ---------- */
+var KEY='beamLoadTrainer.v1', PASS=70;
+function readStore(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+function writeStore(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+var store=readStore(); if(!store.done) store.done={};
+
+/* ---------- helpers ---------- */
+function $(s){ return document.querySelector(s); }
+var nf=new Intl.NumberFormat('en-US',{maximumFractionDigits:1});
+function fmt(n){ var r=Math.round(n*10)/10; if(r===0) r=0; return nf.format(r); }
+function clamp(v,a,b){ return Math.min(b,Math.max(a,v)); }
+function val(id){ var el=document.getElementById(id); var v=el?parseFloat(el.value):NaN; return isFinite(v)?v:0; }
+function isDone(id){ return !!store.done[id]; }
+function kpi(k,v,s){ return '<div class="kpi"><div class="k">'+k+'</div><div class="v">'+v+'</div><div class="s">'+s+'</div></div>'; }
+function fieldHTML(id,label,value,key){ return '<label class="fld"><span>'+label+'</span><input type="number" inputmode="decimal" step="any" min="0" id="'+id+'" data-in="'+key+'" value="'+value+'"></label>'; }
+
+/* ---------- content helpers ---------- */
+function H(x){ return {t:'h',x:x}; }
+function P(x){ return {t:'p',x:x}; }
+function UL(items){ return {t:'ul',items:items}; }
+function OL(items){ return {t:'ol',items:items}; }
+function TB(head,rows){ return {t:'table',head:head,rows:rows}; }
+function F(x){ return {t:'f',x:x}; }
+function EX(title,lines,end){ return {t:'ex',title:title,lines:lines,end:end||''}; }
+function TCH(x){ return {t:'teacher',x:x}; }
+function JOB(x){ return {t:'job',x:x}; }
+function ASK(q,a){ return {t:'ask',q:q,a:a}; }
+function WID(id){ return {t:'widget',id:id}; }
+function CHK(q,options,answer,why){ return {q:q,options:options,answer:answer,why:why}; }
+
+/* ---------- COURSE CONTENT ---------- */
+var UNITS=[
+{ n:1, title:'Force and Loads',
+  blurb:'What a load is, the load letters (D, L, Lr, S, W, E), how loads travel to the ground, how beams are held up, and how loads are combined for design.',
+  lessons:[
+  { id:'1-1', title:'What a load is',
+    big:'A load is a force the building has to hold up. A force is a push or a pull.',
+    body:[
+      H('Start from zero'),
+      P('Stand on a floor. You push down. The floor pushes back up. That push and push-back is a force. A building is a pile of pushes and pulls that must end up safely in the ground.'),
+      TB(['Unit','Short form','What it means'],[
+        ['pound','lb','One pound of force'],
+        ['kip','k','1,000 lb. Used so big numbers stay short'],
+        ['pounds per square foot','psf','Load on each square foot of a floor or roof'],
+        ['pounds per foot','plf','Load along each foot of a beam or joist'],
+        ['pounds per square inch','psi','Stress inside a material']]),
+      EX('Worked example',['A 300 sq ft floor carries 40 psf.','Total load = 40 psf × 300 sq ft = <b>12,000 lb</b>'],'The units cancel: psf × sq ft = lb.'),
+      TCH('Always write the unit next to the number. “40” means nothing. “40 psf” means 40 pounds on every square foot.'),
+      JOB('Before a crew stacks block, brick or drywall on a new floor, the superintendent checks the stack against the design load. Pallets piled in one spot can overload a floor that was designed for an even spread.'),
+      ASK('Why do we need both psf and plf?','A floor spreads its load over an area, so we use psf. A beam only sees load along its length, so we use plf. Same weight, different way of describing it.')
+    ],
+    check:CHK('How many pounds is 1 kip?',['10 lb','100 lb','1,000 lb','10,000 lb'],2,'A kip is 1,000 pounds. Engineers use kips so the numbers stay short.') },
+
+  { id:'1-2', title:'The six load types',
+    big:'Codes give every load a letter. Learn the letters and you can read any load table.',
+    body:[
+      H('The letters'),
+      TB(['Letter','Name','What it is','How it acts'],[
+        ['D','Dead load','Weight of the building itself: walls, partitions, floors, roof, ceilings, columns, framing','Always down. Always there.'],
+        ['L','Live load','People, furniture, equipment, stored materials','Down. Comes and goes. The code sets a minimum for each use.'],
+        ['Lr','Roof live load','Workers, tools and materials on a roof during construction or repair','Down. Temporary.'],
+        ['S','Snow load','Snow sitting on the roof','Down. Depends on the location.'],
+        ['W','Wind load','Air pressure on walls and roofs','Sideways on walls. Up or down on roofs, including uplift.'],
+        ['E','Earthquake load','Ground shaking makes the building’s own weight push sideways','Sideways. A heavier building gets a bigger force.']]),
+      TCH('Dead load never leaves. Live load comes and goes. Wind and earthquake come in bursts. Design for each one, then check the worst mix.'),
+      P('The one exception to “dead load is always in the design”: a check of how much a floor sags from live load alone.'),
+      JOB('Office partitions move, so the slides say add 15 to 20 psf to the floor dead load for them. Flat roofs need a slope of about ¼ inch per foot so water runs off instead of pooling. Pooled water adds weight and sag.'),
+      ASK('Why does wind matter on a heavy building?','Wind pushes walls sideways like a sail. On a roof with little dead weight, wind uplift can be bigger than the roof’s own weight, so the roof has to be tied down.')
+    ],
+    check:CHK('Which letter is the weight of the building itself?',['L','D','W','S'],1,'D is dead load: the permanent weight of the building.') },
+
+  { id:'1-3', title:'The load path: where the weight goes',
+    big:'Every load has one route to the ground. Trace the route and you find every member that matters.',
+    body:[
+      H('The route'),
+      P('Roof or floor deck, then joists, then beams and girders, then columns, then footings, then soil. Each member carries what lands on it from above and hands it to the next member down.'),
+      TB(['Member','What it does'],[
+        ['Joist','Small and closely spaced. Carries the floor or roof deck.'],
+        ['Beam','Carries joists or other loads across a span.'],
+        ['Girder','A big beam that carries other beams.'],
+        ['Column','Takes loads from beams and carries them down. Mostly squeezes (compression).'],
+        ['Footing','Spreads the column load wide enough that the soil can take it.'],
+        ['Purlin','A small beam running across a roof. Carries the roof deck.'],
+        ['Rafter','A sloped roof member.'],
+        ['Girt','A horizontal wall member. Carries wall panels and passes wind load to the columns.'],
+        ['Lintel or header','Sits over a door or window opening. Carries the wall above it.']]),
+      TCH('Think of a bucket line. Each person passes the bucket down. If one person drops it, the water is gone. A weak link in the load path fails the whole building.'),
+      JOB('A missing joist hanger or an undersized header is a load path problem. It is not a cosmetic fix. Stop work and call the engineer.'),
+      ASK('Why is a footing so wide?','Soil can take much less pressure than concrete. A wider footing spreads the column load so the soil pressure stays under its limit.')
+    ],
+    check:CHK('Which member sits over a window or door and carries the wall above it?',['Girt','Purlin','Lintel or header','Rafter'],2,'A lintel or header carries the wall above the opening so the opening does not have to.') },
+
+  { id:'1-4', title:'How loads land on a beam',
+    big:'The same weight can hit a beam at one point or spread along it. The spot changes how the beam bends.',
+    body:[
+      H('Three kinds'),
+      TB(['Type','Picture it as','Example','Unit'],[
+        ['Concentrated','One point','A column sitting on top of a beam','lb'],
+        ['Distributed','Spread over part of the length','Floor decking sitting on a joist','lb/ft (plf)'],
+        ['Uniformly distributed','The same load on every foot of the whole length','Snow spread evenly along a rafter','lb/ft (plf)']]),
+      TCH('A person standing on a plank is a concentrated load. A pile of sand spread evenly along the plank is a uniform load.'),
+      F('Total from a uniform load = w × L      (lb/ft × ft = lb)'),
+      EX('Worked example',['A 14 ft beam with 400 lb/ft spread evenly along it.','Total = 400 × 14 = <b>5,600 lb</b>'],'Use the total when you find the reactions. Use the per-foot number when you draw the shear diagram.'),
+      JOB('A column landing on a beam is a point load at one spot. A masonry wall sitting on a beam is a uniform load along its length. The engineer draws each one separately.')
+    ],
+    check:CHK('A column lands on one spot of a beam. That load is:',['Uniform','Concentrated','Live','Shear'],1,'One spot is a concentrated load.') },
+
+  { id:'1-5', title:'Beam types: how the ends are held',
+    big:'How a beam is supported decides how it bends. Same beam, different supports, different forces.',
+    body:[
+      H('Five types'),
+      TB(['Beam type','What it looks like','Real example'],[
+        ['Simple','Supported at both ends, free to turn','A bridge sitting on two piers'],
+        ['Cantilever','Fixed at one end only. Sticks out past the support.','A balcony built into the wall'],
+        ['Overhang','A simple beam with one end sticking past a support','A deck beam that runs past the post'],
+        ['Continuous','Goes over three or more supports','A floor beam running over several columns'],
+        ['Restrained','One or both ends held so they cannot turn','A beam with a rigid connection into a wall']]),
+      P('Quick test: count the supports. Two supports that let the ends turn means simple. One end locked into a wall with the other end free means cantilever. A beam that runs past a support means overhang.'),
+      TCH('The top of a cantilever or overhang goes into tension near the support. You will see that in Unit 3.'),
+      JOB('A balcony is almost always a cantilever. The wall it is built into has to resist the full moment and any uplift, so the anchors matter.')
+    ],
+    check:CHK('A balcony that is held only by the wall is which beam type?',['Simple','Cantilever','Continuous','Overhang'],1,'One fixed end and one free end sticking out is a cantilever.') },
+
+  { id:'1-6', title:'Stress: load spread over an area',
+    big:'Stress is how hard the material feels a load. Stress = force ÷ area.',
+    body:[
+      F('f = P ÷ A'),
+      UL(['f = stress, in psi (pounds per square inch)','P = load, in lb','A = area, in square inches']),
+      P('Turn it around when you size something: A = P ÷ f. You know the load, you pick a stress the material can take, and the area you need comes out.'),
+      EX('Worked example',['Column load P = 20,000 lb. Area A = 10 sq in.','f = 20,000 ÷ 10 = <b>2,000 psi</b>'],'Want a stress of 1,000 psi instead? A = 20,000 ÷ 1,000 = 20 sq in. Bigger area, less stress.'),
+      TCH('Stand on one foot in soft sand and you sink. Stand on two feet and you sink less. Same weight, bigger area, less stress.'),
+      JOB('Column and footing sizes both come from this. The designer picks an area so the stress stays under the allowable value in the code and material tables.'),
+      ASK('Is psi the same as lb?','No. lb is force. psi is force per square inch. The inch part is the area, so psi tells you how crowded the force is.')
+    ],
+    check:CHK('A load of 6,000 lb sits on 4 sq in. What is the stress?',['24,000 psi','1,500 psi','150 psi','2,400 psi'],1,'6,000 ÷ 4 = 1,500 psi.') },
+
+  { id:'1-7', title:'Combining loads: ASD and LRFD',
+    big:'Loads do not come one at a time. Designers add them in combinations, then compare the result to what the member can take.',
+    body:[
+      H('Two methods'),
+      TB(['','ASD (Allowable Stress)','LRFD (Strength Design)'],[
+        ['Loads used','Real service loads, no multiplying','Loads multiplied up by factors such as 1.2 and 1.6'],
+        ['Compared to','An allowable stress (a safe limit)','The member’s strength, cut by a resistance factor'],
+        ['Which materials','Wood can use either method','Steel and concrete use LRFD'],
+        ['What it looks at','Stress, deflection, buckling, uplift','How the member actually fails']]),
+      P('LRFD exists because it looks at the real failure mode, so the safety margin is easier to see. ASD is simpler, and the slides say it is also acceptable for wood.'),
+      F('Example, LRFD:  1.2D + 1.6L'),
+      P('Read it as: dead load × 1.2, plus live load × 1.6. The 1.6 makes live load count more, because it is less certain.'),
+      H('Use the builder'),
+      P('Type the loads below. The tables build every combination from your slides and mark the one that governs. “Governs” means that combination sets the size. The biggest number wins.'),
+      WID('lb'),
+      TCH('Ask one question for each row: which combination makes this member work hardest?'),
+      JOB('Designers check the governing combinations and let software run the rest. Codes get updated, so check which edition your city uses. The factors change between editions.')
+    ],
+    check:CHK('Which method uses real loads, with no multiplying factors?',['LRFD','ASD','Both','Neither'],1,'ASD is Allowable Stress Design. It uses real loads and compares them to an allowable stress.') },
+
+  { id:'1-8', title:'Roof and floor live loads',
+    big:'The code lets you reduce some live loads on big areas, and it sets a minimum and maximum for roof loads.',
+    body:[
+      H('Roof live load'),
+      F('Lr = L0 × R1 × R2,   with 12 ≤ Lr ≤ 20 psf'),
+      UL([
+        'L0 = unreduced roof live load. 20 psf for an ordinary roof (course book, page 364).',
+        'R1 depends on the tributary area At (the area the member carries). 1 if At ≤ 200 sq ft. 1.2 − 0.001 × At if 200 < At < 600. 0.6 if At ≥ 600.',
+        'R2 depends on the roof slope F (inches of rise per 12 inches of run). 1 if F ≤ 4. 1.2 − 0.05 × F if 4 < F < 12. 0.6 if F ≥ 12.']),
+      H('Floor live load reduction'),
+      F('L = L0 × (0.25 + 15 ÷ √(KLL × AT))'),
+      UL([
+        'Only when AT is more than 400 sq ft.',
+        'L0 comes from Table 1.3 (page 32). KLL comes from Table 1.4 (page 33).',
+        'The result cannot go below 0.5 × L0 for one floor, or 0.4 × L0 for two or more floors.']),
+      P('Use the two calculators below. They use the same formulas as your slides.'),
+      WID('roof'),
+      WID('floor'),
+      TCH('A big area means not every square foot is loaded at the same time, so the code lets you take some load off. A small area gets no reduction.'),
+      JOB('Estimators and engineers use the reduction to size girders and columns that carry a lot of floor. Using it on a small beam is a common mistake. The 400 sq ft test stops that.')
+    ],
+    check:CHK('Roof: L0 = 20 psf, R1 = 1 and R2 = 1. What is Lr?',['12 psf','20 psf','14.4 psf','40 psf'],1,'20 × 1 × 1 = 20 psf. That is inside the 12 to 20 limit.') }
+  ]},
+
+{ n:2, title:'Moments and Shear',
+  blurb:'How a push turns into a moment, how to find the support forces (reactions), and how shear builds up along a beam.',
+  lessons:[
+  { id:'2-1', title:'Moment: force times distance',
+    big:'A force far from a pivot twists harder than the same force close in. That twist is a moment.',
+    body:[
+      F('Moment = Force × Distance'),
+      P('The distance is the moment arm: the straight-line distance from the pivot to where the force acts. Units: ft-lb, lb-in or kip-ft. Use ft-lb in this course.'),
+      EX('Seesaw',['Kid A: 100 lb sits 6 ft from the pivot. Moment = 100 × 6 = 600 ft-lb.','Kid B: 50 lb sits 12 ft from the pivot on the other side. Moment = 50 × 12 = 600 ft-lb.'],'Equal moments on both sides means a balanced seesaw.'),
+      H('Three rules'),
+      OL(['Always name the point you turn about. “Moment about A” is the only kind that means something.','Measure the distance straight out from that point.','Opposite turning directions get opposite signs. Pick one sign rule and keep it for the whole problem.']),
+      TCH('A moment means nothing by itself. It only means something around a point. Always write the point.'),
+      JOB('A crane has a load chart. The safe load drops as the reach gets longer, because the moment arm gets longer. Same weight, longer moment arm.')
+    ],
+    check:CHK('A 300 lb force acts 5 ft from the pivot. What is the moment?',['305 ft-lb','60 ft-lb','1,500 ft-lb','1,500 lb'],2,'300 × 5 = 1,500 ft-lb. Pounds alone are not a moment.') },
+
+  { id:'2-2', title:'Equilibrium: nothing moves',
+    big:'If a beam sits still, every push and every twist cancels out. That gives you the equations to find the unknowns.',
+    body:[
+      P('Engineers say the beam is in equilibrium. There are three checks:'),
+      TB(['Equation','Means','Use it for'],[
+        ['ΣV = 0','Up forces = down forces','Checking the reactions'],
+        ['ΣH = 0','Push to the left = push to the right','Only when there are sideways loads'],
+        ['ΣM = 0','Clockwise moments = counterclockwise moments, about one point','Finding the reactions']]),
+      P('Σ (sigma) means “add them all up.” So ΣM = 0 means: add all the moments and the total is zero.'),
+      EX('Why this works',['A simple beam has two unknown reactions, R1 and R2.','ΣM about one support has only the other reaction in it. ΣV has both. Two equations, two unknowns. Solve.']),
+      TCH('Two unknown supports need two equations. Pick your moment point so one unknown drops out. That trick is the whole next lesson.'),
+      JOB('Engineers check equilibrium by hand for every beam before trusting software. A quick ΣV = 0 check catches a bad reaction fast.')
+    ],
+    check:CHK('Which equation says up forces equal down forces?',['ΣM = 0','ΣV = 0','ΣH = 0','V = P ÷ A'],1,'ΣV = 0 means the vertical forces balance.') },
+
+  { id:'2-3', title:'Finding the reactions (R1 and R2)',
+    big:'Reactions are the upward pushes from the supports. Find them first. Every other number depends on them.',
+    body:[
+      H('Steps'),
+      OL(['Draw the beam. Label each support (R1, R2), each load, and every distance.','Take moments about one support. Its reaction drops out of the equation.','Solve for the other reaction.','Check: add all the vertical forces. They should cancel.']),
+      H('One point load shortcut'),
+      F('R1 = P × b ÷ L        R2 = P × a ÷ L'),
+      P('a = distance from the left support to the load. b = distance from the load to the right support. L = span. Also a + b = L.'),
+      EX('Worked example',['20 ft beam. 4,000 lb load at 5 ft from the left end. So a = 5 and b = 15.','R2 = 4,000 × 5 ÷ 20 = <b>1,000 lb</b>','R1 = 4,000 × 15 ÷ 20 = <b>3,000 lb</b>'],'Check: 3,000 + 1,000 = 4,000 lb.'),
+      TCH('The load closer to a support sends more of its weight into that support. The load is 5 ft from the left end, so the left support takes the bigger share.'),
+      ASK('Why not just split the load in half?','Only a load at the center splits 50/50. Move the load and the split moves with it. The moment equation handles that.')
+    ],
+    check:CHK('A 4,000 lb load sits at the center of a 20 ft beam. What is R1?',['1,000 lb','2,000 lb','4,000 lb','8,000 lb'],1,'At the center each support takes half: 4,000 ÷ 2 = 2,000 lb.') },
+
+  { id:'2-4', title:'Shear: the beam wants to split apart',
+    big:'Shear is the force inside a beam that tries to make one part slide past or drop past the next part.',
+    body:[
+      P('Imagine cutting the beam. Each piece has to stay in balance on its own. The vertical force the cut has to carry to hold one piece up is the shear at that cut.'),
+      P('A beam can fail three ways:'),
+      UL(['Bending: the top squeezes and the bottom stretches (Unit 3).','Horizontal shear: wood fibers slide past each other.','Vertical shear: the beam drops between its supports.']),
+      F('V = sum of vertical forces on ONE side of the cut.   Use the left side: V = up on the left − down on the left.'),
+      P('Up is positive. Down is negative.'),
+      EX('Worked example',['Beam with R1 = 1,000 lb at the left end. A 600 lb load sits at 2 ft.','Just right of the left support: V = <b>1,000 lb</b>','Just right of the 600 lb load: V = 1,000 − 600 = <b>400 lb</b>'],'Shear drops by the size of each point load it passes.'),
+      H('Two rules'),
+      UL(['The biggest shear sits at a support, and it equals that support’s reaction.','Shear only changes where there is a load.']),
+      TCH('Cut the beam in your head. Ask: what force does the cut need to hold the left piece up?'),
+      JOB('Short, deep beams and heavy point loads close to a support are where shear usually controls the design. For a steel beam, the web (the thin vertical plate) carries most of the shear.')
+    ],
+    check:CHK('Shear at a cut is the sum of:',['Vertical forces on one side of the cut','The total moment at the cut','The stress in the bottom fibers','How far the beam sags'],0,'Shear is the sum of the vertical forces on one side of the cut.') },
+
+  { id:'2-5', title:'Drawing a shear diagram, step by step',
+    big:'A shear diagram is a picture of shear along the beam. Build it from left to right, one load at a time.',
+    body:[
+      H('The rules'),
+      OL(['Start at the left support. V = R1.','At each point load, the line jumps down by the size of the load.','Along a uniform load, the line slopes down. The slope is the load per foot. A 400 lb/ft load drops the line 400 lb every foot.','Where there is no load, the line stays flat.','At the right support, the line jumps up by R2 and lands on zero. If it does not, a reaction is wrong.']),
+      EX('Worked example (from your Day 2 slides)',['12 ft beam. R1 = 1,000 lb. A 600 lb load at 2 ft. A 1,000 lb load at 6 ft. R2 = 600 lb.','Left support: V = <b>1,000 lb</b>','After the 600 lb load at 2 ft: V = 1,000 − 600 = <b>400 lb</b>','After the 1,000 lb load at 6 ft: V = 400 − 1,000 = <b>−600 lb</b>','Right support: V = −600 + 600 (R2) = <b>0</b> ✓'],'Remember the spot where V goes from + to −. That is where the bending moment peaks (Unit 3).'),
+      TCH('Walk left to right like reading. Down steps go down and up steps go up. If you do not finish at zero, you made a mistake.'),
+      JOB('Shear diagrams tell the engineer where a beam needs the most vertical strength. The largest value sets the minimum for the web, the shear connection and the bearing at the support.')
+    ],
+    check:CHK('A uniform load on a beam makes the shear line do what?',['Jump down','Slope down at a steady rate','Stay flat','Curve up'],1,'A uniform load removes shear a little at a time, so the line slopes. The slope equals the load per foot.') }
+  ]},
+
+{ n:3, title:'Bending',
+  blurb:'How a beam bends, how to find the bending moment at any cut, the moment diagram and its slope rule, quick formulas, and how bending becomes stress.',
+  lessons:[
+  { id:'3-1', title:'Bending: top squeezes, bottom stretches',
+    big:'A beam bends. When it bends, its top gets squeezed and its bottom gets stretched.',
+    body:[
+      P('Bend a ruler in your hands. The inside of the bend squeezes. The outside stretches. A beam does the same. Between the two is a line that neither squeezes nor stretches. Engineers call it the neutral axis.'),
+      H('Two signs'),
+      TB(['Name','Shape','Top of the beam','Where it happens'],[
+        ['Positive moment (sag)','Bows down in the middle, like a smile','Compression (squeezed)','Simple beams under load'],
+        ['Negative moment (hog)','Bends up over a support, like a frown','Tension (stretched)','Past a support: cantilever or overhang']]),
+      TCH('Sag is a smile and the top is squeezed. Hog is a frown and the top is stretched. Learn the pair.'),
+      JOB('Concrete is strong in squeeze and weak in stretch. Steel rebar goes on the tension side: the bottom of a sagging slab, and the top over a cantilever support.'),
+      ASK('Why does the top squeeze?','A bent beam has to get shorter on the inside of the curve and longer on the outside. Picture a stack of cards bent into an arc.')
+    ],
+    check:CHK('A cantilever carrying a load has its top fibers in:',['Compression','Tension','No stress','Shear'],1,'A cantilever hogs near its support, so the top is stretched: tension.') },
+
+  { id:'3-2', title:'Bending moment at one cut',
+    big:'The bending moment at a cut is the twisting effect of everything on one side of that cut.',
+    body:[
+      F('M = (reaction × distance) on the left − (load × distance) on the left'),
+      OL(['Pick the cut at a distance x from the left end.','List every reaction and load to the LEFT of the cut.','Multiply each one by its distance from the cut.','Reactions add. Loads subtract.','Positive means sag. Negative means hog.']),
+      EX('Worked example (from your Day 4 slides)',['16 ft beam. R1 = 2,000 lb at the left end. An 8,000 lb load sits 12 ft from the left end. R2 = 6,000 lb at 16 ft.','Cut at x = 6 ft. The only thing to its left is R1.','M = 2,000 × 6 − 0 = <b>12,000 ft-lb (sag)</b>'],'Check from the right side: R2 × 10 − 8,000 × 6 = 60,000 − 48,000 = 12,000 ft-lb. Same answer, so the work is right.'),
+      TCH('Pick one side and stick with it for the whole diagram. Left to right is the course habit.'),
+      JOB('The moment at a cut is what that section of beam has to resist. Designers check the section with the largest moment, not a random spot.'),
+      ASK('What if I pick the right side?','On a balanced beam you get the same answer. Use the left side for your diagrams so your signs match the course slides.')
+    ],
+    check:CHK('The cut is 6 ft from the left end. R1 = 2,000 lb at the left end and no loads to the left of the cut. What is M?',['2,000 ft-lb','6,000 ft-lb','12,000 ft-lb','8,000 ft-lb'],2,'2,000 × 6 = 12,000 ft-lb.') },
+
+  { id:'3-3', title:'The moment diagram and the slope rule',
+    big:'The moment diagram is a picture of M along the beam. The shear tells you the slope of that picture.',
+    body:[
+      F('Slope of the moment diagram = shear'),
+      P('Shear is how fast the moment changes as you move along the beam. That one rule tells you the shape of the moment diagram without doing every calculation.'),
+      TB(['Shear in that region','Moment shape'],[
+        ['Zero (no load)','Flat, horizontal line'],
+        ['Constant (point loads only)','Straight sloped line'],
+        ['Sloping (uniform load)','Curve (a parabola)'],
+        ['A point load on the beam','Sharp corner where the slope changes'],
+        ['Crosses zero, from + to −','The peak of the moment diagram']]),
+      EX('Check it: Day 4, Figure 3.14',['Span 12 ft. 12,000 lb at 2 ft. 18,000 lb at 8 ft. R1 = 16,000 lb.','M(0) = 0. M(2) = 16,000 × 2 = 32,000. M(8) = 56,000. M(12) = 0.','From 0 to 2 ft the shear is 16,000 lb, so the line climbs 16,000 per foot: 32,000 at 2 ft ✓','From 2 to 8 ft the shear is 4,000 lb, so the line climbs 4,000 per foot: 32,000 + 6 × 4,000 = 56,000 at 8 ft ✓'],'The peak is at 8 ft, where shear goes from + to −. Maximum sag moment: 56,000 ft-lb.'),
+      TCH('Use the slope rule to check your work. The moment should climb where shear is positive and fall where shear is negative.'),
+      JOB('The peak on the moment diagram is the spot designers size the member for. Get that number right and the rest of the beam is easier.'),
+      ASK('Why is the peak where shear is zero?','The moment stops climbing when the shear stops being positive. A peak has zero slope, and zero shear means zero slope.')
+    ],
+    check:CHK('Where shear is constant (point loads only between the supports), the moment line is:',['Flat','Straight and sloped','Curved','Vertical'],1,'Constant shear means constant slope, so the moment line is straight.') },
+
+  { id:'3-4', title:'Quick formulas for simple cases',
+    big:'For the common cases you do not have to draw anything. Know these four formulas, then check your diagrams against them.',
+    body:[
+      TB(['Case','Maximum moment','Where it is'],[
+        ['Simple beam, one point load at the center','M = P × L ÷ 4','Under the load, at center'],
+        ['Simple beam, uniform load','M = w × L² ÷ 8','At center of span'],
+        ['Cantilever, point load at the tip','M = P × L','At the wall'],
+        ['Cantilever, uniform load','M = w × L² ÷ 2','At the wall']]),
+      P('P = point load (lb). w = load per foot (lb/ft). L = span or cantilever length (ft). The answer is in ft-lb.'),
+      EX('Worked example',['10 ft simple beam. 1,000 lb at the center.','M = 1,000 × 10 ÷ 4 = <b>2,500 ft-lb</b>'],'Your full diagram should peak at this same value. If it does not, something is wrong.'),
+      TCH('Use the quick formula to get the number. Draw the full diagram to see the shape and where the moment sits.'),
+      JOB('Estimators and early designers use these formulas for a first pass at beam sizes. Final sizing uses the full diagram and the code.')
+    ],
+    check:CHK('A 16 ft simple beam carries a uniform load of 200 lb/ft. What is the maximum moment?',['3,200 ft-lb','6,400 ft-lb','12,800 ft-lb','800 ft-lb'],1,'200 × 16² ÷ 8 = 200 × 256 ÷ 8 = 6,400 ft-lb.') },
+
+  { id:'3-5', title:'Bonus: bending stress, how hard the fibers work',
+    big:'Moment makes stress. Stress is biggest at the top and bottom edges, and zero at the neutral axis.',
+    body:[
+      P('This is not on the Day 4 slides. It is the next step after bending moment, and you use it to pick a beam size.'),
+      F('fb = M ÷ S'),
+      UL(['fb = bending stress (psi). M = moment in in-lb (ft-lb × 12). S = section modulus (in³), a measure of how much the cross-section resists bending.','For a solid rectangle: S = b × d² ÷ 6, where b = width (in) and d = depth (in).']),
+      EX('Worked example',['A solid piece 2 in wide and 10 in deep. Moment M = 20,000 ft-lb.','S = 2 × 10² ÷ 6 = 33.3 in³','M = 20,000 × 12 = 240,000 in-lb','fb = 240,000 ÷ 33.3 = <b>7,200 psi</b>'],'Compare fb to the allowable stress in your code or material table. If fb is higher, use a bigger section or a stronger material.'),
+      TCH('Depth is squared. Double the depth and S goes up 4 times. Double the width and S only doubles. That is why beams are deep and thin.'),
+      JOB('Deep sections give a high S for little material, which is why steel beams are tall and slim. The 2 in by 10 in piece here is a clean number for the math. Real 2×10 lumber is about 1½ in by 9¼ in.')
+    ],
+    check:CHK('You double the depth of a rectangular beam. The section modulus S goes up by:',['2 times','4 times','8 times','It stays the same'],1,'S = b × d² ÷ 6. Depth is squared, so doubling it gives 2² = 4 times.') }
+  ]}
+];
+
+var LESSONS=[];
+UNITS.forEach(function(u){ u.lessons.forEach(function(l){ l.unit=u.n; LESSONS.push(l); }); });
+var FLAT=LESSONS.map(function(l){ return 'lesson-'+l.id; }).concat(['lab','test']);
+
+function lessonById(id){ for(var i=0;i<LESSONS.length;i++){ if(LESSONS[i].id===id) return LESSONS[i]; } return null; }
+function labelOf(r){
+  if(r==='lab') return 'Beam Lab';
+  if(r==='test') return 'Final Test';
+  if(r==='home') return 'Start';
+  var l=lessonById(r.slice(7));
+  return l ? 'Lesson '+l.id.replace('-','.')+': '+l.title : 'Start';
+}
+
+/* ---------- lesson rendering ---------- */
+function blockHTML(b){
+  switch(b.t){
+    case 'h': return '<h3 class="sec-h">'+b.x+'</h3>';
+    case 'p': return '<p>'+b.x+'</p>';
+    case 'ul': return '<ul class="list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>';
+    case 'ol': return '<ol class="steps">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ol>';
+    case 'table': return '<div class="scroll"><table class="tbl"><thead><tr>'+b.head.map(function(c){ return '<th scope="col">'+c+'</th>'; }).join('')+'</tr></thead><tbody>'+b.rows.map(function(r){ return '<tr>'+r.map(function(c){ return '<td>'+c+'</td>'; }).join('')+'</tr>'; }).join('')+'</tbody></table></div>';
+    case 'f': return '<p class="m">'+b.x+'</p>';
+    case 'ex': return '<div class="example"><div class="ex-title">'+b.title+'</div>'+b.lines.map(function(l){ return '<div class="ex-line">'+l+'</div>'; }).join('')+(b.end?'<div class="ex-end">'+b.end+'</div>':'')+'</div>';
+    case 'teacher': return '<div class="note teacher"><div class="note-label">Teacher says</div><div>'+b.x+'</div></div>';
+    case 'job': return '<div class="note job"><div class="note-label">On the job</div><div>'+b.x+'</div></div>';
+    case 'ask': return '<details class="why"><summary>Ask the teacher: '+b.q+'</summary><div class="why-a">'+b.a+'</div></details>';
+    case 'widget': return WIDGET_HTML[b.id]();
+  }
+  return '';
+}
+
+function checkHTML(id,c,done){
+  return '<section class="check" data-lesson="'+id+'" aria-labelledby="chk-'+id+'">'+
+    '<h3 class="sec-h" id="chk-'+id+'">Check yourself</h3>'+
+    '<p class="check-q">'+c.q+'</p>'+
+    '<div class="opts">'+c.options.map(function(o,i){ return '<button type="button" class="opt" data-act="opt" data-i="'+i+'">'+o+'</button>'; }).join('')+'</div>'+
+    '<div class="fb" aria-live="polite">'+(done?'<p><b>You already passed this check.</b></p>':'')+'</div></section>';
+}
+
+function pagerHTML(l){
+  var idx=FLAT.indexOf('lesson-'+l.id);
+  var prevR=idx>0?FLAT[idx-1]:'home';
+  var nextR=FLAT[idx+1]||'home';
+  return '<nav class="pager" aria-label="Lesson steps"><a class="btn ghost" href="#'+prevR+'">← '+labelOf(prevR)+'</a><a class="btn" href="#'+nextR+'">'+labelOf(nextR)+' →</a></nav>';
+}
+
+function lessonHTML(l){
+  var n=LESSONS.indexOf(l)+1;
+  return '<article class="lesson">'+
+    '<p class="eyebrow">Unit '+l.unit+' · Lesson '+l.id.replace('-','.')+' · '+n+' of '+LESSONS.length+(isDone(l.id)?' · Passed':'')+'</p>'+
+    '<h1>'+l.title+'</h1>'+
+    '<p class="big">'+l.big+'</p>'+
+    l.body.map(blockHTML).join('')+
+    checkHTML(l.id,l.check,isDone(l.id))+
+    pagerHTML(l)+
+    '</article>';
+}
+
+/* ---------- home ---------- */
+var resetArmed=false;
+function unitCard(u){
+  var doneN=u.lessons.filter(function(l){ return isDone(l.id); }).length;
+  var first=u.lessons.filter(function(l){ return !isDone(l.id); })[0]||u.lessons[0];
+  return '<section class="ucard"><p class="eyebrow">Unit '+u.n+' · '+doneN+' of '+u.lessons.length+' done</p>'+
+    '<h2>'+u.title+'</h2><p>'+u.blurb+'</p>'+
+    '<ul class="ulist">'+u.lessons.map(function(l){ return '<li>'+l.id.replace('-','.')+' '+l.title+(isDone(l.id)?' ✓':'')+'</li>'; }).join('')+'</ul>'+
+    '<a class="btn ghost" href="#lesson-'+first.id+'">'+(doneN===u.lessons.length?'Review Unit '+u.n:'Open Lesson '+first.id.replace('-','.'))+'</a></section>';
+}
+function homeHTML(){
+  var doneN=LESSONS.filter(function(l){ return isDone(l.id); }).length;
+  var nxt=LESSONS.filter(function(l){ return !isDone(l.id); })[0];
+  var href, txt;
+  if(!nxt){ href='#test'; txt='Take the final test'; }
+  else if(doneN===0){ href='#lesson-'+nxt.id; txt='Start Lesson '+nxt.id.replace('-','.'); }
+  else { href='#lesson-'+nxt.id; txt='Continue at Lesson '+nxt.id.replace('-','.'); }
+  return '<section class="hero"><p class="eyebrow">Structural member behavior · Units 1 to 3, then a test</p>'+
+    '<h1>Beam Load Trainer</h1>'+
+    '<p class="lead">Start with what a load is. Then learn how a beam holds it, how it twists (moment), how it splits (shear), and how it bends. Each lesson ends with one check question. The final test covers all three units.</p>'+
+    '<div class="actions"><a class="btn" href="'+href+'">'+txt+'</a><a class="btn ghost" href="#lab">Open the Beam Lab</a></div>'+
+    '<p class="small">Lessons done: '+doneN+' of '+LESSONS.length+'.'+(store.bestPct!=null?' Best test score: '+store.bestPct+'%.':'')+'</p></section>'+
+    '<section class="how" aria-label="How to use"><div><b>1 · Read</b><span>The big idea, then the steps. Teacher says boxes give the short version.</span></div><div><b>2 · Check</b><span>Answer the check question. A right answer marks the lesson done.</span></div><div><b>3 · Try</b><span>Use the Beam Lab to change the numbers and watch the diagrams move.</span></div></section>'+
+    '<section class="units">'+UNITS.map(unitCard).join('')+'</section>'+
+    '<div class="reset"><button type="button" class="linkbtn" data-act="reset">'+(resetArmed?'Click again to erase all progress':'Reset my progress')+'</button></div>';
+}
+
+/* ---------- widgets ---------- */
+var WIDGET_HTML={
+  lb:function(){
+    var keys=['D','L','Lr','S','W','E'];
+    var labels={D:'Dead, D',L:'Live, L',Lr:'Roof live, Lr',S:'Snow, S',W:'Wind, W',E:'Earthquake, E'};
+    var def={D:10,L:40,Lr:20,S:0,W:20,E:0};
+    return '<div class="widget"><div class="w-head">Load builder</div>'+
+      '<p class="w-note">Type every load in the same unit, for example psf for floors and roofs. Leave a load at 0 if it does not apply.</p>'+
+      '<div class="w-fields">'+keys.map(function(k){ return fieldHTML('lb-'+k,labels[k],def[k],'lb'); }).join('')+'</div>'+
+      '<div class="w-tables"><div><h4>ASD, real loads</h4><div class="scroll" id="lb-asd"></div></div><div><h4>LRFD, factored loads</h4><div class="scroll" id="lb-lrfd"></div></div></div>'+
+      '<p class="w-note" id="lb-note"></p></div>';
+  },
+  roof:function(){
+    return '<div class="widget"><div class="w-head">Roof live load calculator</div>'+
+      '<p class="w-note">Enter the three numbers. The result is in psf.</p>'+
+      '<div class="w-fields">'+fieldHTML('roof-L0','L0, unreduced (psf)',20,'roof')+fieldHTML('roof-At','Tributary area At (sq ft)',400,'roof')+fieldHTML('roof-F','Roof slope F (in per 12 in)',6,'roof')+'</div>'+
+      '<div class="w-out" id="roof-out"></div><div id="roof-steps"></div></div>';
+  },
+  floor:function(){
+    return '<div class="widget"><div class="w-head">Floor live load reduction</div>'+
+      '<p class="w-note">K_LL and L0 come from your code book tables. Areas of 400 sq ft or less get no reduction.</p>'+
+      '<div class="w-fields">'+fieldHTML('fl-L0','L0, unreduced (psf)',40,'floor')+fieldHTML('fl-K','K_LL (element factor)',4,'floor')+fieldHTML('fl-At','Tributary area AT (sq ft)',500,'floor')+
+      '<label class="fld"><span>Floors this member supports</span><select id="fl-n" data-in="floor"><option value="1">One floor</option><option value="2">Two or more floors</option></select></label></div>'+
+      '<div class="w-out" id="floor-out"></div><div id="floor-steps"></div></div>';
+  }
+};
+
+function comboTable(rows){
+  var mx=Math.max.apply(null,rows.map(function(r){ return r[1]; }));
+  return '<table class="tbl"><thead><tr><th scope="col">Combination</th><th scope="col">Result</th></tr></thead><tbody>'+
+    rows.map(function(r){ var g=r[1]===mx; return '<tr class="'+(g?'gov':'')+'"><td>'+r[0]+(g?' <b>(governs)</b>':'')+'</td><td class="mono">'+fmt(r[1])+'</td></tr>'; }).join('')+
+    '</tbody></table>';
+}
+function renderLB(){
+  var v={}; ['D','L','Lr','S','W','E'].forEach(function(k){ v[k]=Math.max(0,val('lb-'+k)); });
+  var asd=[
+    ['D',v.D],['D + L',v.D+v.L],['D + Lr',v.D+v.Lr],['D + 0.75L + 0.75Lr',v.D+0.75*(v.L+v.Lr)],
+    ['D + W',v.D+v.W],['D + 0.7E',v.D+0.7*v.E],['D + 0.75L + 0.75Lr + 0.75W',v.D+0.75*(v.L+v.Lr+v.W)],
+    ['D + 0.75L + 0.75Lr + 0.525E',v.D+0.75*(v.L+v.Lr)+0.525*v.E],['0.6D + W',0.6*v.D+v.W],['0.6D + 0.7E',0.6*v.D+0.7*v.E]];
+  var lrfd=[
+    ['1.4D',1.4*v.D],['1.2D + 1.6L + 0.5Lr',1.2*v.D+1.6*v.L+0.5*v.Lr],['1.2D + 1.6Lr + L',1.2*v.D+1.6*v.Lr+v.L],
+    ['1.2D + 1.6Lr + 0.8W',1.2*v.D+1.6*v.Lr+0.8*v.W],['1.2D + 1.6W + L + 0.5Lr',1.2*v.D+1.6*v.W+v.L+0.5*v.Lr],
+    ['1.2D + 1.0E + L + 0.2S',1.2*v.D+v.E+v.L+0.2*v.S],['0.9D + 1.0E',0.9*v.D+v.E],['0.9D + 1.6W',0.9*v.D+1.6*v.W]];
+  var a=document.getElementById('lb-asd'), b=document.getElementById('lb-lrfd'), n=document.getElementById('lb-note');
+  if(!a||!b) return;
+  a.innerHTML=comboTable(asd); b.innerHTML=comboTable(lrfd);
+  n.textContent='The row marked governs has the biggest result, so it sets the size. For uplift and tipping the worst case is the smallest dead load, so also read the 0.6D + W and 0.9D + 1.6W rows.';
+}
+function renderRoof(){
+  var L0=val('roof-L0'), At=Math.max(0,val('roof-At')), F=Math.max(0,val('roof-F'));
+  var R1=At<=200?1:(At>=600?0.6:1.2-0.001*At);
+  var R2=F<=4?1:(F>=12?0.6:1.2-0.05*F);
+  var raw=L0*R1*R2, Lr=clamp(raw,12,20);
+  var o=document.getElementById('roof-out'); if(!o) return;
+  o.innerHTML=kpi('R1 from area',R1.toFixed(2),'From At')+kpi('R2 from slope',R2.toFixed(2),'From F')+
+    kpi('Lr',fmt(Lr)+' psf', raw<12?'Raised to the 12 psf minimum':(raw>20?'Cut to the 20 psf maximum':'Inside the 12 to 20 psf range'));
+  document.getElementById('roof-steps').innerHTML='<p class="m">Lr = '+fmt(L0)+' × '+R1.toFixed(2)+' × '+R2.toFixed(2)+' = '+fmt(raw)+' psf, then limit to 12 to 20 psf.</p>';
+}
+function renderFloor(){
+  var L0=val('fl-L0'), K=Math.max(0.01,val('fl-K')), At=Math.max(0,val('fl-At'));
+  var floors=(document.getElementById('fl-n')||{}).value||'1';
+  var o=document.getElementById('floor-out'), s=document.getElementById('floor-steps'); if(!o) return;
+  if(L0<=0){ o.innerHTML=kpi('Enter L0','—','L0 must be more than 0'); s.innerHTML=''; return; }
+  if(At<=400){
+    o.innerHTML=kpi('Reduction','Not allowed','The area must be more than 400 sq ft');
+    s.innerHTML='<p class="m">Keep L = '+fmt(L0)+' psf. Your area is '+fmt(At)+' sq ft.</p>';
+    return;
+  }
+  var factor=0.25+15/Math.sqrt(K*At), Lr=L0*factor;
+  var fmin=L0*(floors==='1'?0.5:0.4), fin=Math.max(Lr,fmin);
+  o.innerHTML=kpi('Reduced L',fmt(fin)+' psf','Down '+fmt((1-fin/L0)*100)+'% from L0')+
+    kpi('Floor minimum',fmt(fmin)+' psf',floors==='1'?'0.5 × L0, one floor':'0.4 × L0, two or more floors');
+  s.innerHTML='<p class="m">L = '+fmt(L0)+' × (0.25 + 15 ÷ √('+fmt(K)+' × '+fmt(At)+')) = '+fmt(L0)+' × '+factor.toFixed(3)+' = '+fmt(Lr)+' psf</p>'+
+    '<p class="m">Floor minimum check: the larger of '+fmt(Lr)+' and '+fmt(fmin)+' is '+fmt(fin)+' psf.</p>';
+}
+
+/* ---------- BEAM LAB: statics and diagrams ---------- */
+var PRESETS=[
+  {name:'Day 4 · Figure 3.14', L:12, w:0, p1:12000, a1:2, p2:18000, a2:8},
+  {name:'Day 4 · Figure 3.15', L:14, w:400, p1:21000, a1:4, p2:0, a2:0},
+  {name:'Day 4 · 16 ft example', L:16, w:0, p1:8000, a1:12, p2:0, a2:0},
+  {name:'Day 2 · 18 ft example', L:18, w:0, p1:9000, a1:10, p2:0, a2:0}
+];
+function labModel(){
+  var L=clamp(val('lab-L')||1,1,200), w=Math.max(0,val('lab-w')), loads=[];
+  [['lab-p1','lab-a1'],['lab-p2','lab-a2']].forEach(function(pr){
+    var P=Math.max(0,val(pr[0])), a=clamp(val(pr[1]),0,L);
+    if(P>0) loads.push({P:P,a:a});
+  });
+  loads.sort(function(x,y){ return x.a-y.a; });
+  return {L:L,w:w,loads:loads};
+}
+function analyze(m){
+  var L=m.L, w=m.w, ls=m.loads, totalP=0, sumPa=0;
+  ls.forEach(function(l){ totalP+=l.P; sumPa+=l.P*l.a; });
+  var W=w*L, R2=(sumPa+W*L/2)/L, R1=totalP+W-R2;
+  var V=function(x){ var s=R1-w*x; for(var i=0;i<ls.length;i++){ if(x>ls[i].a) s-=ls[i].P; } return s; };
+  var M=function(x){ var s=R1*x-w*x*x/2; for(var i=0;i<ls.length;i++){ if(x>ls[i].a) s-=ls[i].P*(x-ls[i].a); } return s; };
+  var xs=[], N=400, i;
+  for(i=0;i<=N;i++) xs.push(L*i/N);
+  ls.forEach(function(l){ xs.push(l.a); xs.push(Math.min(L,l.a+1e-6)); });
+  xs.sort(function(a,b){ return a-b; });
+  var pts=xs.map(function(x){ return {x:x,v:V(x),m:M(x)}; });
+  var maxV=pts[0], sag=pts[0], hog=pts[0];
+  pts.forEach(function(p){
+    if(Math.abs(p.v)>Math.abs(maxV.v)) maxV=p;
+    if(p.m>sag.m) sag=p;
+    if(p.m<hog.m) hog=p;
+  });
+  var zeros=[];
+  for(i=0;i<pts.length-1;i++){
+    var a=pts[i].v, b=pts[i+1].v;
+    if((a>0&&b<0)||(a<0&&b>0)) zeros.push(pts[i].x+(pts[i+1].x-pts[i].x)*a/(a-b));
+  }
+  return {L:L,w:w,loads:ls,R1:R1,R2:R2,total:totalP+W,V:V,M:M,pts:pts,maxV:maxV,sag:sag,hog:hog,zeros:zeros};
+}
+function momentTerms(r,x){
+  var s=fmt(r.R1)+' × '+fmt(x), sub=[];
+  r.loads.forEach(function(l){ if(l.a<x-1e-9) sub.push(fmt(l.P)+' × '+fmt(x-l.a)); });
+  if(sub.length) s+=' − ('+sub.join(' + ')+')';
+  if(r.w>0&&x>0) s+=' − '+fmt(r.w)+' × '+fmt(x)+'² ÷ 2';
+  return s+' = <b>'+fmt(r.M(x))+' ft-lb</b>';
+}
+function stepsHTML(r){
+  var L=r.L, w=r.w, ls=r.loads, h='';
+  var sumT=ls.map(function(l){ return fmt(l.P)+' × '+fmt(l.a); });
+  if(w>0) sumT.push(fmt(w)+' × '+fmt(L)+'² ÷ 2');
+  var downT=ls.map(function(l){ return fmt(l.P); });
+  if(w>0) downT.push(fmt(w)+' × '+fmt(L));
+  h+='<p><b>Step 1. Find R2.</b> Moments about the left end: each load times its distance from the left end, then divide by the span.</p>';
+  h+='<p class="m">R2 = ('+(sumT.join(' + ')||'0')+') ÷ '+fmt(L)+' = <b>'+fmt(r.R2)+' lb</b></p>';
+  h+='<p><b>Step 2. Find R1.</b> All the down loads, minus R2.</p>';
+  h+='<p class="m">R1 = ('+(downT.join(' + ')||'0')+') − '+fmt(r.R2)+' = <b>'+fmt(r.R1)+' lb</b></p>';
+  h+='<p><b>Step 3. Check.</b> R1 + R2 = '+fmt(r.R1+r.R2)+' lb. Down loads = '+fmt(r.total)+' lb. '+(Math.abs(r.R1+r.R2-r.total)<0.5?'They match.':'They do not match. Check the numbers.')+'</p>';
+  h+='<p><b>Step 4. Shear.</b> Start at R1. A point load drops the line by its size. Each foot of uniform load drops it by w.</p>';
+  ls.forEach(function(l){
+    h+='<p class="m">At '+fmt(l.a)+' ft: V just before = '+fmt(r.V(l.a))+' lb, V just after = '+fmt(r.V(l.a+1e-6))+' lb</p>';
+  });
+  h+='<p class="m">Biggest shear = '+fmt(Math.abs(r.maxV.v))+' lb, at a support.</p>';
+  h+='<p><b>Step 5. Moment at each load.</b> M = R1 × x, minus each load to the left times its distance from x, minus w × x² ÷ 2.</p>';
+  ls.forEach(function(l){ h+='<p class="m">M at '+fmt(l.a)+' ft = '+momentTerms(r,l.a)+'</p>'; });
+  if(r.sag.m>0.5) h+='<p class="m">Biggest sag, at '+fmt(r.sag.x)+' ft: M = '+momentTerms(r,r.sag.x)+'</p>';
+  h+='<p><b>Step 6. Read the diagrams.</b> The moment peaks where shear crosses zero. Positive = sag (top squeezed). Negative = hog (top stretched).</p>';
+  if(ls.length===1&&w===0){
+    var P=ls[0].P, a=ls[0].a;
+    h+='<p class="m">Quick check, one load: M max = P × a × b ÷ L = '+fmt(P)+' × '+fmt(a)+' × '+fmt(L-a)+' ÷ '+fmt(L)+' = '+fmt(P*a*(L-a)/L)+' ft-lb</p>';
+  }
+  return h;
+}
+function xTicks(L){ var t=[]; for(var i=0;i<=4;i++) t.push(L*i/4); return t; }
+function svgWrap(W,H,label,inner){ return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+label+'">'+inner+'</svg>'; }
+function gridAndAxis(r,X,yT,yB,yM){
+  var s='';
+  xTicks(r.L).forEach(function(t){
+    var x=X(t);
+    s+='<line x1="'+x.toFixed(1)+'" y1="'+yT+'" x2="'+x.toFixed(1)+'" y2="'+yB+'" style="stroke:var(--line)" stroke-width="1" stroke-dasharray="3 4"/>';
+    s+='<text x="'+x.toFixed(1)+'" y="'+(yB+20)+'" text-anchor="middle" class="svg-lab">'+fmt(t)+' ft</text>';
+  });
+  s+='<line x1="70" y1="'+yM+'" x2="624" y2="'+yM+'" style="stroke:var(--ink-2)" stroke-width="1.2"/>';
+  return s;
+}
+function shearSVG(r){
+  var W=640,H=230,x0=70,x1=624,yT=18,yB=190,yM=(yT+yB)/2;
+  var maxA=Math.max(1,Math.abs(r.maxV.v));
+  var k=(yB-yM-8)/maxA;
+  var X=function(x){ return x0+x/r.L*(x1-x0); };
+  var Y=function(v){ return yM-v*k; };
+  var curve=r.pts.map(function(p,i){ return (i?'L':'M')+X(p.x).toFixed(1)+' '+Y(p.v).toFixed(1); }).join(' ');
+  var area='M'+X(0).toFixed(1)+' '+yM+' '+r.pts.map(function(p){ return 'L'+X(p.x).toFixed(1)+' '+Y(p.v).toFixed(1); }).join(' ')+' L'+X(r.L).toFixed(1)+' '+yM+' Z';
+  var mx=X(r.maxV.x), my=Y(r.maxV.v);
+  var lbl=r.maxV.x>r.L/2?'<text x="'+(mx-10).toFixed(1)+'" y="'+(my<yM?my+18:my-10).toFixed(1)+'" text-anchor="end" class="svg-val">'+fmt(r.maxV.v)+' lb</text>':'<text x="'+(mx+10).toFixed(1)+'" y="'+(my<yM?my+18:my-10).toFixed(1)+'" class="svg-val">'+fmt(r.maxV.v)+' lb</text>';
+  return svgWrap(W,H,'Shear diagram',
+    gridAndAxis(r,X,yT,yB,yM)+
+    '<path d="'+area+'" style="fill:var(--shear)" fill-opacity=".16"/>'+
+    '<path d="'+curve+'" fill="none" style="stroke:var(--shear)" stroke-width="2.4" stroke-linejoin="round"/>'+
+    '<circle cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="5" style="fill:var(--shear)"/>'+lbl+
+    '<text x="'+x0+'" y="'+(yT+12)+'" class="svg-lab">shear, up = +</text>');
+}
+function momentSVG(r){
+  var W=640,H=230,x0=70,x1=624,yT=18,yB=190,yM=(yT+yB)/2;
+  var maxA=Math.max(1,Math.abs(r.sag.m),Math.abs(r.hog.m));
+  var k=(yB-yM-8)/maxA;
+  var X=function(x){ return x0+x/r.L*(x1-x0); };
+  var Y=function(m){ return yM+m*k; };
+  var curve=r.pts.map(function(p,i){ return (i?'L':'M')+X(p.x).toFixed(1)+' '+Y(p.m).toFixed(1); }).join(' ');
+  var area='M'+X(0).toFixed(1)+' '+yM+' '+r.pts.map(function(p){ return 'L'+X(p.x).toFixed(1)+' '+Y(p.m).toFixed(1); }).join(' ')+' L'+X(r.L).toFixed(1)+' '+yM+' Z';
+  var extra='';
+  if(r.sag.m>0.5){
+    var sx=X(r.sag.x), sy=Y(r.sag.m);
+    extra='<circle cx="'+sx.toFixed(1)+'" cy="'+sy.toFixed(1)+'" r="5" style="fill:var(--moment)"/>'+
+      '<text x="'+(r.sag.x>r.L/2?(sx-10).toFixed(1):(sx+10).toFixed(1))+'" y="'+(sy-10).toFixed(1)+'" text-anchor="'+(r.sag.x>r.L/2?'end':'start')+'" class="svg-val">'+fmt(r.sag.m)+' ft-lb</text>';
+  }
+  return svgWrap(W,H,'Bending moment diagram',
+    gridAndAxis(r,X,yT,yB,yM)+
+    '<path d="'+area+'" style="fill:var(--moment)" fill-opacity=".16"/>'+
+    '<path d="'+curve+'" fill="none" style="stroke:var(--moment)" stroke-width="2.4" stroke-linejoin="round"/>'+extra+
+    '<text x="'+x0+'" y="'+(yT+12)+'" class="svg-lab">sag (+) drawn down</text>');
+}
+function beamSVG(r){
+  var W=640,H=200,x0=70,x1=624,yb=86;
+  var X=function(x){ return x0+x/r.L*(x1-x0); };
+  var s='';
+  function arrow(x,y1,y2,col){
+    return '<line x1="'+x.toFixed(1)+'" y1="'+y1+'" x2="'+x.toFixed(1)+'" y2="'+(y2-8)+'" style="stroke:'+col+'" stroke-width="2"/>'+
+      '<polygon points="'+(x-5).toFixed(1)+','+(y2-8)+' '+(x+5).toFixed(1)+','+(y2-8)+' '+x.toFixed(1)+','+y2+'" style="fill:'+col+'"/>';
+  }
+  if(r.w>0){
+    s+='<line x1="'+x0+'" y1="'+(yb-40)+'" x2="'+x1+'" y2="'+(yb-40)+'" style="stroke:var(--moment)" stroke-width="2"/>';
+    var n=Math.max(4,Math.min(24,Math.round(r.L)));
+    for(var i=0;i<=n;i++) s+=arrow(X(r.L*i/n),yb-40,yb-8,'var(--moment)');
+    s+='<text x="'+(x0+4)+'" y="'+(yb-46)+'" class="svg-lab">'+fmt(r.w)+' lb/ft</text>';
+  }
+  r.loads.forEach(function(l){
+    var x=X(l.a);
+    s+=arrow(x,yb-62,yb-8,'var(--ink)');
+    s+='<text x="'+x.toFixed(1)+'" y="'+(yb-68)+'" text-anchor="middle" class="svg-val">'+fmt(l.P)+' lb</text>';
+  });
+  s+='<rect x="'+x0+'" y="'+(yb-6)+'" width="'+(x1-x0)+'" height="12" style="fill:var(--ink)"/>';
+  s+='<polygon points="'+x0+','+(yb+6)+' '+(x0-14)+','+(yb+24)+' '+(x0+14)+','+(yb+24)+'" style="fill:var(--surface);stroke:var(--ink)" stroke-width="2"/>';
+  s+='<line x1="'+(x0-20)+'" y1="'+(yb+24)+'" x2="'+(x0+20)+'" y2="'+(yb+24)+'" style="stroke:var(--ink)" stroke-width="2"/>';
+  s+='<polygon points="'+x1+','+(yb+6)+' '+(x1-14)+','+(yb+24)+' '+(x1+14)+','+(yb+24)+'" style="fill:var(--surface);stroke:var(--ink)" stroke-width="2"/>';
+  s+='<circle cx="'+(x1-7)+'" cy="'+(yb+30)+'" r="4" style="fill:var(--ink)"/><circle cx="'+(x1+7)+'" cy="'+(yb+30)+'" r="4" style="fill:var(--ink)"/>';
+  s+='<text x="'+(x0-14)+'" y="'+(yb+52)+'" class="svg-val">R1 = '+fmt(r.R1)+' lb</text>';
+  s+='<text x="'+(x1+14)+'" y="'+(yb+52)+'" text-anchor="end" class="svg-val">R2 = '+fmt(r.R2)+' lb</text>';
+  var dy=yb+76;
+  s+='<line x1="'+x0+'" y1="'+dy+'" x2="'+x1+'" y2="'+dy+'" style="stroke:var(--ink-2)" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+(dy-6)+'" x2="'+x0+'" y2="'+(dy+6)+'" style="stroke:var(--ink-2)" stroke-width="1"/><line x1="'+x1+'" y1="'+(dy-6)+'" x2="'+x1+'" y2="'+(dy+6)+'" style="stroke:var(--ink-2)" stroke-width="1"/>';
+  s+='<text x="'+((x0+x1)/2)+'" y="'+(dy+20)+'" text-anchor="middle" class="svg-lab">span L = '+fmt(r.L)+' ft</text>';
+  return svgWrap(W,H,'Beam with loads and supports',s);
+}
+function labUpdate(){
+  var out=document.getElementById('lab-out'); if(!out) return;
+  var r=analyze(labModel());
+  out.innerHTML=kpi('Left reaction R1',fmt(r.R1)+' lb','Pushes up at the left support')+
+    kpi('Right reaction R2',fmt(r.R2)+' lb','Pushes up at the right support')+
+    kpi('Biggest shear',fmt(Math.abs(r.maxV.v))+' lb','Always at a support')+
+    kpi('Biggest sag moment',fmt(Math.max(0,r.sag.m))+' ft-lb',r.sag.m>0.5?'At '+fmt(r.sag.x)+' ft':'No sag')+
+    kpi('Biggest hog moment',r.hog.m<-0.5?fmt(r.hog.m)+' ft-lb':'None','Simple beams only sag')+
+    kpi('Shear crosses zero',r.zeros.length?'At '+fmt(r.zeros[0])+' ft':'Never','The moment peaks here');
+  document.getElementById('lab-beam').innerHTML=beamSVG(r);
+  document.getElementById('lab-shear').innerHTML=shearSVG(r);
+  document.getElementById('lab-mom').innerHTML=momentSVG(r);
+  document.getElementById('lab-steps').innerHTML=stepsHTML(r);
+}
+function labField(id,label,v){ return fieldHTML(id,label,v,'lab'); }
+function labHTML(){
+  var p=PRESETS[0];
+  return '<article class="lab">'+
+    '<p class="eyebrow">Tool · Units 2 and 3</p>'+
+    '<h1>Beam Lab</h1>'+
+    '<p class="big">Change any number. The reactions, the diagrams and the steps all update. Start from one of your slide examples.</p>'+
+    '<div class="presets" role="group" aria-label="Start from a slide example">'+PRESETS.map(function(q,i){ return '<button type="button" class="chip" data-act="preset" data-i="'+i+'" aria-pressed="'+(i===0)+'">'+q.name+'</button>'; }).join('')+'</div>'+
+    '<div class="w-fields">'+
+      labField('lab-L','Span L (ft)',p.L)+labField('lab-w','Uniform load w (lb/ft)',p.w)+
+      labField('lab-p1','Load 1, P1 (lb)',p.p1)+labField('lab-a1','Load 1 at a1 (ft from left)',p.a1)+
+      labField('lab-p2','Load 2, P2 (lb)',p.p2)+labField('lab-a2','Load 2 at a2 (ft from left)',p.a2)+
+    '</div>'+
+    '<div class="w-out" id="lab-out"></div>'+
+    '<figure class="fig"><div id="lab-beam"></div><figcaption>The beam, its loads and its supports. Load arrows point down.</figcaption></figure>'+
+    '<figure class="fig"><div id="lab-shear"></div><figcaption>Shear diagram. Up is positive.</figcaption></figure>'+
+    '<figure class="fig"><div id="lab-mom"></div><figcaption>Bending moment diagram. Sag is positive and is drawn down, so the shape matches how the beam bends.</figcaption></figure>'+
+    '<details class="steps-panel" open><summary>Steps with numbers</summary><div id="lab-steps"></div></details>'+
+    '</article>';
+}
+
+/* ---------- FINAL TEST ---------- */
+var TEST=[
+ {unit:1,type:'mc',q:'What is a load?',options:['A force the building has to hold up','The weight of the concrete mix only','A kind of beam','The size of a column'],answer:0,why:'A load is any force the structure has to carry. A force is a push or a pull.'},
+ {unit:1,type:'mc',q:'Which load is the building’s own weight?',options:['Dead load (D)','Live load (L)','Wind load (W)','Snow load (S)'],answer:0,why:'Dead load is the permanent weight of the walls, floors, roof, columns and framing.'},
+ {unit:1,type:'mc',q:'Wind can lift a roof. What is this called?',options:['Uplift','Creep','Ponding','Shear'],answer:0,why:'Uplift is wind pulling the roof up. It matters most on roofs with little dead weight.'},
+ {unit:1,type:'mc',q:'Which is the correct load path, from the top of a building to the ground?',options:['Floor, joists, beams, columns, footings, soil','Columns, footings, joists, floor, soil','Footings, beams, floor, joists, soil','Soil, columns, floor, joists, beams'],answer:0,why:'Loads travel down: deck to joists, joists to beams, beams to columns, columns to footings, footings to soil.'},
+ {unit:1,type:'num',q:'A column carries P = 20,000 lb on an area of A = 10 sq in. What is the stress f?',ulabel:'psi',answer:2000,why:'f = P ÷ A = 20,000 ÷ 10 = 2,000 psi.'},
+ {unit:1,type:'num',q:'A roof has L0 = 20 psf, a tributary area of 400 sq ft and a slope of F = 6. Find Lr.',ulabel:'psf',answer:14.4,why:'R1 = 1.2 − 0.001 × 400 = 0.8. R2 = 1.2 − 0.05 × 6 = 0.9. Lr = 20 × 0.8 × 0.9 = 14.4 psf.'},
+ {unit:1,type:'num',q:'A floor has dead load D = 10 psf and live load L = 40 psf. Using LRFD, what is 1.2D + 1.6L?',ulabel:'psf',answer:76,why:'1.2 × 10 + 1.6 × 40 = 12 + 64 = 76 psf.'},
+ {unit:2,type:'mc',q:'Moment is:',options:['Force × distance','Force ÷ area','Force + distance','Load ÷ length'],answer:0,why:'Moment = force × distance from the pivot. Units are ft-lb.'},
+ {unit:2,type:'mc',q:'A 300 lb force acts 5 ft from the pivot. What is the moment?',options:['305 ft-lb','60 ft-lb','1,500 ft-lb','1,500 lb'],answer:2,why:'300 × 5 = 1,500 ft-lb. Pounds alone are not a moment.'},
+ {unit:2,type:'mc',q:'Which equation means a beam is not turning?',options:['ΣM = 0','ΣV = P ÷ A','M = P × A','R1 = 2 × R2'],answer:0,why:'Equilibrium: the sum of all the moments about one point is zero.'},
+ {unit:2,type:'num',q:'A 20 ft simple beam has a 4,000 lb load 5 ft from the left end. What is R2?',ulabel:'lb',answer:1000,why:'R2 = P × a ÷ L = 4,000 × 5 ÷ 20 = 1,000 lb.'},
+ {unit:2,type:'num',q:'An 18 ft simple beam has a 9,000 lb load 10 ft from the left end. What is R1?',ulabel:'lb',answer:4000,why:'R1 = P × b ÷ L, where b = 8 ft is the distance to the right end: 9,000 × 8 ÷ 18 = 4,000 lb.'},
+ {unit:2,type:'mc',q:'Shear right next to a support equals:',options:['Zero','That support’s reaction','The span length','The moment at the cut'],answer:1,why:'Just inside a support, the shear is the reaction at that support.'},
+ {unit:2,type:'mc',q:'Where is the biggest shear in a simple beam?',options:['At the support with the bigger reaction','At midspan, always','At the support with the smaller reaction','Shear is zero everywhere'],answer:0,why:'The biggest shear equals the bigger reaction, and it sits at that support.'},
+ {unit:3,type:'mc',q:'A simple beam sags under load. The top fibers are in:',options:['Compression','Tension','No stress','Shear'],answer:0,why:'Sag squeezes the top and stretches the bottom.'},
+ {unit:3,type:'mc',q:'Which is true when a beam bends?',options:['Top compresses, bottom stretches','Top stretches, bottom compresses','Both sides compress','Both sides stretch'],answer:0,why:'The inside of the bend squeezes and the outside stretches.'},
+ {unit:3,type:'num',q:'A simple beam has a 20 ft span and a 10,000 lb load at the center. What is the maximum moment?',ulabel:'ft-lb',answer:50000,why:'M = P × L ÷ 4 = 10,000 × 20 ÷ 4 = 50,000 ft-lb.'},
+ {unit:3,type:'num',q:'A simple beam has a 12 ft span and a uniform load of 150 lb/ft. What is the maximum moment?',ulabel:'ft-lb',answer:2700,why:'M = w × L² ÷ 8 = 150 × 144 ÷ 8 = 2,700 ft-lb.'},
+ {unit:3,type:'mc',q:'Where is the maximum bending moment?',options:['Where shear passes through zero','At the supports, always','Where there is no load','At the top edge of the beam'],answer:0,why:'Shear is the slope of the moment. Zero shear means the peak moment.'},
+ {unit:3,type:'num',q:'A simple beam has a 12 ft span, a 12,000 lb load at 2 ft and an 18,000 lb load at 8 ft. What is the maximum moment?',ulabel:'ft-lb',answer:56000,why:'R1 = 16,000 lb. M at 8 ft = 16,000 × 8 − 12,000 × 6 = 56,000 ft-lb.'},
+ {unit:3,type:'num',q:'A cantilever is 10 ft long, fixed at the wall, with a 1,000 lb load at the tip. What is the maximum moment at the wall?',ulabel:'ft-lb',answer:10000,why:'M = P × L = 1,000 × 10 = 10,000 ft-lb at the wall.'},
+ {unit:3,type:'mc',q:'Where shear is zero (no load), the moment line is:',options:['Flat (horizontal)','Straight and sloped','Curved','Vertical'],answer:0,why:'The moment slope equals the shear. Zero slope means a flat line.'}
+];
+var T={started:false,i:0,ans:[],done:false};
+function allLessonsDone(){ return LESSONS.every(function(l){ return isDone(l.id); }); }
+function isRight(q,a){
+  if(a===undefined||a===null) return false;
+  if(q.type==='mc') return a===q.answer;
+  return Math.abs(a-q.answer)<=Math.max(Math.abs(q.answer)*0.005,0.05);
+}
+function scoreTest(){
+  var s=0, byUnit={1:[0,0],2:[0,0],3:[0,0]};
+  TEST.forEach(function(q,i){ var ok=isRight(q,T.ans[i]); byUnit[q.unit][1]++; if(ok){ s++; byUnit[q.unit][0]++; } });
+  return {s:s,pct:Math.round(s/TEST.length*100),byUnit:byUnit};
+}
+function answerText(q,a){
+  if(a===undefined||a===null) return 'No answer';
+  if(q.type==='mc') return q.options[a];
+  return String(a)+' '+q.ulabel;
+}
+function correctText(q){ return q.type==='mc'?q.options[q.answer]:fmt(q.answer)+' '+q.ulabel; }
+function testIntroHTML(){
+  var nxt=LESSONS.filter(function(l){ return !isDone(l.id); })[0];
+  var h='<article><p class="eyebrow">Final test · '+TEST.length+' questions · Pass mark '+PASS+'%</p><h1>Final Test</h1>'+
+    '<p class="big">Covers all three units. Some questions are multiple choice. Others you type as a number, in the unit shown.</p>';
+  if(store.bestPct!=null) h+='<p class="small">Best score so far: '+store.bestPct+'%.</p>';
+  if(allLessonsDone()){
+    h+='<p>You finished every lesson. Start when you are ready.</p><div class="actions"><button type="button" class="btn" data-act="tstart">Start the test</button></div>';
+  } else {
+    h+='<div class="note job"><div class="note-label">Before you start</div><div>You have not finished every lesson yet. Finish them first for the best result.</div></div>'+
+      '<div class="actions"><a class="btn ghost" href="#lesson-'+nxt.id+'">Go to Lesson '+nxt.id.replace('-','.')+'</a><button type="button" class="btn" data-act="tstart">Take the test anyway</button></div>';
+  }
+  return h+'</article>';
+}
+function testQuestionHTML(){
+  var q=TEST[T.i], a=T.ans[T.i], answered=a!==undefined;
+  var h='<article><p class="eyebrow">Final test · Question '+(T.i+1)+' of '+TEST.length+' · Unit '+q.unit+'</p>'+
+    '<div class="qbar" aria-hidden="true"><i style="width:'+(T.i/TEST.length*100)+'%"></i></div>'+
+    '<section class="qcard"><p class="check-q">'+q.q+'</p>';
+  if(q.type==='mc'){
+    h+='<div class="opts">'+q.options.map(function(o,i){ return '<button type="button" class="opt" data-act="tpick" data-i="'+i+'" aria-pressed="'+(a===i)+'">'+o+'</button>'; }).join('')+'</div>';
+  } else {
+    h+='<div class="numrow"><input type="number" inputmode="decimal" step="any" id="tnum" data-in="tnum" aria-label="Your answer" value="'+(answered?a:'')+'"><span class="unit-l">'+q.ulabel+'</span></div>';
+  }
+  h+='</section><div class="pager"><button type="button" class="btn ghost" data-act="tprev" '+(T.i===0?'disabled':'')+'>← Previous</button>'+
+    '<button type="button" class="btn" data-act="tnext" '+(answered?'':'disabled')+'>'+(T.i===TEST.length-1?'See my score':'Next question')+'</button></div></article>';
+  return h;
+}
+function testResultsHTML(){
+  var sc=scoreTest(), pass=sc.pct>=PASS;
+  var h='<article><p class="eyebrow">Final test · Results</p><div class="score">'+sc.s+' / '+TEST.length+'</div>'+
+    '<h1 style="margin-top:14px">'+(pass?'Pass':'Not yet')+'</h1>'+
+    '<p class="big">'+sc.pct+'% right. The pass mark is '+PASS+'%.</p>';
+  var names={1:'Force and Loads',2:'Moments and Shear',3:'Bending'};
+  h+='<h3 class="sec-h">By unit</h3><div class="scroll"><table class="tbl"><thead><tr><th scope="col">Unit</th><th scope="col">Right</th></tr></thead><tbody>'+
+    [1,2,3].map(function(u){ return '<tr><td>Unit '+u+' · '+names[u]+'</td><td class="mono">'+sc.byUnit[u][0]+' of '+sc.byUnit[u][1]+'</td></tr>'; }).join('')+
+    '</tbody></table></div>';
+  h+='<p>'+(pass?'Good work. Use the Beam Lab on any example you missed.':'Look at the units you missed. Reread those lessons, then retake the test.')+'</p>';
+  h+='<div class="actions"><button type="button" class="btn" data-act="trestart">Retake the test</button><a class="btn ghost" href="#lab">Open the Beam Lab</a><a class="btn ghost" href="#home">Back to start</a></div>';
+  h+='<h3 class="sec-h">Review every question</h3>';
+  TEST.forEach(function(q,i){
+    var a=T.ans[i], ok=isRight(q,a);
+    h+='<section class="rev '+(ok?'ok':'miss')+'"><p class="rev-n">'+(i+1)+' · '+(ok?'Right':'Missed')+' · Unit '+q.unit+'</p>'+
+      '<p class="rev-q">'+q.q+'</p>'+
+      '<p><b>Your answer:</b> '+answerText(q,a)+'</p>'+
+      (ok?'':'<p><b>Correct answer:</b> '+correctText(q)+'</p>')+
+      '<p class="rev-why">'+q.why+'</p></section>';
+  });
+  return h+'</article>';
+}
+function testHTML(){
+  if(T.done) return testResultsHTML();
+  if(!T.started) return testIntroHTML();
+  return testQuestionHTML();
+}
+
+/* ---------- navigation and rendering ---------- */
+var VIEW=document.getElementById('view');
+var RAIL=document.getElementById('rail');
+var railOpen=false;
+function currentRoute(){ return (location.hash||'#home').slice(1); }
+function renderRail(){
+  var cur=currentRoute();
+  var s='<button type="button" class="rail-toggle" data-act="rail" aria-expanded="'+railOpen+'">Course map <span aria-hidden="true">'+(railOpen?'−':'+')+'</span></button>';
+  s+='<div class="rail-body"><a class="'+(cur==='home'?'on':'')+'" href="#home">Start</a>';
+  UNITS.forEach(function(u){
+    s+='<div class="rail-h">Unit '+u.n+' · '+u.title+'</div><ol>';
+    u.lessons.forEach(function(l){
+      var on=cur==='lesson-'+l.id;
+      s+='<li><a href="#lesson-'+l.id+'"'+(on?' class="on" aria-current="page"':'')+'><span class="rail-n">'+l.id.replace('-','.')+'</span><span>'+l.title+'</span>'+(isDone(l.id)?'<span class="tick" aria-label="done">✓</span>':'')+'</a></li>';
+    });
+    s+='</ol>';
+  });
+  s+='<div class="rail-h">Practice</div>';
+  s+='<a class="'+(cur==='lab'?'on':'')+'" href="#lab">Beam Lab</a>';
+  s+='<a class="'+(cur==='test'?'on':'')+'" href="#test">Final Test</a></div>';
+  RAIL.className='rail'+(railOpen?' open':'');
+  RAIL.innerHTML=s;
+}
+function renderProgress(){
+  var n=LESSONS.filter(function(l){ return isDone(l.id); }).length;
+  $('#prog-text').textContent='Lessons done '+n+' of '+LESSONS.length;
+  $('#prog-fill').style.width=(n/LESSONS.length*100)+'%';
+}
+function render(){
+  var r=currentRoute(), html, kind='home', lesson=null;
+  if(r.indexOf('lesson-')===0) lesson=lessonById(r.slice(7));
+  if(lesson){ kind='lesson'; html=lessonHTML(lesson); }
+  else if(r==='lab'){ kind='lab'; html=labHTML(); }
+  else if(r==='test'){ kind='test'; html=testHTML(); }
+  else { html=homeHTML(); }
+  VIEW.innerHTML=html;
+  renderRail();
+  renderProgress();
+  if(kind==='lesson'){
+    if(document.getElementById('lb-asd')) renderLB();
+    if(document.getElementById('roof-out')) renderRoof();
+    if(document.getElementById('floor-out')) renderFloor();
+  }
+  if(kind==='lab') labUpdate();
+}
+function nextRoute(id){
+  var idx=FLAT.indexOf('lesson-'+id), r=FLAT[idx+1]||'home';
+  return {route:r,label:labelOf(r)};
+}
+function onOpt(btn){
+  var box=btn.closest('.check'); if(!box) return;
+  var l=lessonById(box.getAttribute('data-lesson')); if(!l) return;
+  var c=l.check, i=parseInt(btn.getAttribute('data-i'),10), fb=box.querySelector('.fb');
+  if(i===c.answer){
+    var all=box.querySelectorAll('.opt');
+    for(var k=0;k<all.length;k++){ all[k].disabled=true; if(k===i) all[k].classList.add('right'); }
+    store.done[l.id]=true; writeStore();
+    var nx=nextRoute(l.id);
+    fb.innerHTML='<p><b>Correct.</b> '+c.why+'</p><p><a class="btn" href="#'+nx.route+'">Next: '+nx.label+' →</a></p>';
+    renderRail(); renderProgress();
+  } else {
+    btn.disabled=true; btn.classList.add('wrong');
+    fb.innerHTML='<p><b>Not yet.</b> Reread the Teacher says box, then pick another choice.</p>';
+  }
+}
+function setNum(input){
+  var v=input.value, ok=v!==''&&isFinite(parseFloat(v));
+  if(ok) T.ans[T.i]=parseFloat(v); else delete T.ans[T.i];
+  var b=document.querySelector('[data-act="tnext"]');
+  if(b) b.disabled=!ok;
+}
+
+document.addEventListener('click',function(e){
+  var t=e.target.closest?e.target.closest('[data-act]'):null;
+  if(!t) return;
+  var act=t.getAttribute('data-act');
+  if(act==='opt'){ onOpt(t); return; }
+  if(act==='rail'){ railOpen=!railOpen; renderRail(); return; }
+  if(act==='reset'){
+    if(!resetArmed){ resetArmed=true; render(); return; }
+    store={done:{}}; writeStore(); resetArmed=false; render(); return;
+  }
+  if(act==='preset'){
+    var p=PRESETS[parseInt(t.getAttribute('data-i'),10)];
+    document.getElementById('lab-L').value=p.L; document.getElementById('lab-w').value=p.w;
+    document.getElementById('lab-p1').value=p.p1; document.getElementById('lab-a1').value=p.a1;
+    document.getElementById('lab-p2').value=p.p2; document.getElementById('lab-a2').value=p.a2;
+    document.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed',c===t?'true':'false'); });
+    labUpdate(); return;
+  }
+  if(act==='tstart'){ T={started:true,i:0,ans:[],done:false}; render(); return; }
+  if(act==='tpick'){ T.ans[T.i]=parseInt(t.getAttribute('data-i'),10); render(); return; }
+  if(act==='tprev'){ if(T.i>0) T.i--; render(); return; }
+  if(act==='tnext'){
+    if(T.i<TEST.length-1){ T.i++; }
+    else {
+      T.done=true;
+      var sc=scoreTest();
+      store.lastScore=sc.s; store.bestPct=Math.max(store.bestPct||0,sc.pct); writeStore();
+    }
+    render(); return;
+  }
+  if(act==='trestart'){ T={started:true,i:0,ans:[],done:false}; render(); return; }
+});
+document.addEventListener('input',function(e){
+  var k=e.target.getAttribute?e.target.getAttribute('data-in'):null;
+  if(!k) return;
+  if(k==='lab') labUpdate();
+  else if(k==='lb') renderLB();
+  else if(k==='roof') renderRoof();
+  else if(k==='floor') renderFloor();
+  else if(k==='tnum') setNum(e.target);
+});
+window.addEventListener('hashchange',function(){
+  railOpen=false; resetArmed=false;
+  render();
+  window.scrollTo(0,0);
+});
+render();
+})();
+</script>
