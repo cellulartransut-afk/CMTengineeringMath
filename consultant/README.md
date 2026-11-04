@@ -13,8 +13,14 @@ An AI consultant with the experience of a 50-year Bahamian superintendent and pr
 | `knowledge/04-estimating-and-materials.md` | Estimating method, takeoff rules, landed cost, shipping, lead times, specs for salt, wind and termites |
 | `knowledge/05-field-playbook.md` | PM and super systems: sequence, quality hold points, daily routine, safety, hurricane plan, closeout |
 | `knowledge/06-money.md` | Markup vs margin, overhead, cash flow, books, insurance, bonds, turning profit into assets |
-| `templates/` | Small works contract, subcontract, change order, proposal, invoice, daily report, checklists |
-| `tools/estimator.xlsx` | Landed cost, job estimate, markup/margin, cash flow and labour cost (NIB) calculators |
+| `knowledge/07-cost-codes.md` | The cost code book: 123 job codes in 15 divisions, cost types, overhead codes |
+| `operations-manual/` | **The SOPs your company runs on**, 16 of them. `00-index.md` explains the system and how long each document lasts before it needs rewording |
+| `templates/` | Contracts (short form, small works, time and materials, maintenance service, subcontract), `contract-guide.md` (which to use when), change order, proposal, invoice, notice letters, receipts and releases, daily report, checklists |
+| `guide/` | **The beginner's guide.** Start at `guide/00-start-here.md`. Glossary, every checklist explained, how a house gets built, business setup, spreadsheets, contracts, a job start to finish |
+| `tools/estimator.xlsx` | Landed cost, job estimate, markup/margin, cash flow and labour cost (NIB) |
+| `tools/cost-code-book.xlsx` | Cost codes plus your unit cost book (your own dated prices; old ones flagged) |
+| `tools/job-cost-tracker.xlsx` | One copy per job: budget vs actual vs forecast, POs and subcontracts, receipts, change orders, billing, sub bid comparison, 3-week look-ahead |
+| `tools/office-tracker.xlsx` | Leads and win rate, who owes you, monthly profit, VAT threshold warning, sub document expiry |
 | `my-business/` | Your business profile, sub bench and job log. The consultant reads these first and keeps them updated |
 
 ## How to use it
@@ -32,7 +38,7 @@ Examples:
 ### In the Claude app (phone or web), as a Project
 1. Create a new Project called "Contracting Consultant".
 2. Open `../.claude/agents/bahamas-contracting-consultant.md`. Copy everything from `# Who you are` to the end. Paste it into the Project's instructions.
-3. Upload to the Project's knowledge: everything in `knowledge/`, `templates/`, `my-business/`, and `tools/estimator.xlsx`.
+3. Upload to the Project's knowledge: everything in `knowledge/`, `operations-manual/`, `templates/`, `guide/` and `my-business/`. Keep the `.xlsx` files on your phone or computer to use in Excel or Google Sheets.
 4. Ask questions in chats inside that Project.
 5. In a Project the consultant can't save files. When it gives you an update for `my-business/profile.md`, paste it in and re-upload the file.
 
