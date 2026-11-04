@@ -61,6 +61,9 @@ Why it matters: banks and bond providers want reviewed statements by about year 
 
 **B$.** The Bahamian dollar. Pegged 1 to 1 to the US dollar: B$100 = US$100. Florida prices convert straight across, before freight, duty and VAT.
 
+**B44 (NIB form).** The Employer's Report on Accident. You file it with NIB when one of your employees is injured at work. Claims must be made within 3 months.
+Why it matters: write it up the same day the injury happens, while the facts are fresh.
+
 **Backcharge.** A cost you deduct from what you owe a sub because you had to do something they were supposed to do: clean up, fix a defect, replace damaged work. Your subcontract: written notice, 48 hours to fix (immediately for safety), then you fix it and deduct the cost plus 10%.
 Example: the painter leaves paint on new tile and ignores your notice. You pay a cleaner B$200. You deduct B$200 + 10% = B$220 from the painter's next payment. Keep the notice and the photos.
 
@@ -93,6 +96,8 @@ Why it matters: they keep your lines in place after the corner pegs are dug out 
 
 **Benchmark (datum).** A fixed point of known height on or near the site that every level on the job is measured from.
 Why it matters: if your benchmark gets knocked or moved, every height on the job is wrong.
+
+**Belt course.** Another name for the tie beam. See **tie beam (belt course, ring beam)**.
 
 **Bench (sub bench).** Your list of subs you trust, ideally two per trade, with their documents on file. Kept in `consultant/my-business/subs.md`.
 
@@ -212,6 +217,8 @@ Why it matters: keep a licensing file for every job from job one: contract, perm
 **Contingency.** An amount in your estimate for things you cannot see or predict. 3% to 5% for clear scope; 10% to 15% for renovation with unknowns.
 Example: renovation direct cost B$20,000 x 10% = B$2,000. It is not extra profit. It is there for problems that are yours to absorb, not the client's.
 
+**Control joint.** A planned groove sawn or tooled into a slab or stucco so that shrinkage cracks happen in a straight line where you want them, not at random. Locations per the drawings.
+
 **Contractor / general contractor (GC).** The business that holds the contract with the client and is responsible for the whole job. A general contractor usually self-performs some work and manages subs for the rest. A paper contractor subs out all of it.
 
 **Conveyance.** The legal document that transfers ownership of land from one person to another. It shows who owns the property.
@@ -275,10 +282,17 @@ Why it matters: it defines how long your exposure lasts. Your subs give you the 
 **Delivery note (delivery ticket).** The paper that comes with a delivery listing what was sent. For ready-mix concrete the ticket shows the mix, strength, slump, volume, time batched and any water added.
 Why it matters: check and count before you sign. Write damage or shortages on the note. Once you sign it clean, the supplier owes you nothing.
 
+**Demand letter.** A formal letter, usually from your attorney, demanding payment of a debt by a date before legal action starts.
+Why it matters: for small unpaid sums it often works without going to court.
+
 **Demobilisation / remobilisation.** Packing up and leaving site (demob). Coming back and setting up again (remob). Both cost money.
 Why it matters: your contract lets you charge for them if the client causes a suspension.
 
 **Department of Inland Revenue (DIR).** The tax office. Handles business licences and VAT.
+
+**Department of Immigration.** Issues work permits and enforces the rules on who may work in The Bahamas.
+
+**Department of Labour.** Handles employment law questions: minimum wage, hours, overtime, terms of employment, workplace safety.
 
 **Department of Physical Planning.** The office that handles Town Planning: zoning, use, setbacks, subdivision approval.
 
@@ -304,6 +318,8 @@ Why it matters: it cuts you out and breaks your control of scope and quality, wh
 
 **Documents and priority (order of precedence).** The contract clause listing the documents that make up the contract (agreement, scope, drawings, specs, proposal) and which one wins if they disagree.
 Why it matters: when the drawing says one thing and the scope says another, this clause settles it without a fight.
+
+**Double handling.** Moving materials more than once: truck to dock, dock to boat, boat to dock, dock to truck, truck to site. Each move costs labour and breaks things. Common on Family Island jobs. Price it.
 
 **Dowels.** Short bars cast into a footing (or slab or beam) and left sticking out so the next wall or pour can lap onto them.
 Why it matters: dowels in the wrong place mean the wall bars cannot line up with the block cores. Check positions before the footing pour.
@@ -576,6 +592,8 @@ Example: to keep a 20% margin you must mark up 25%, not 20%. Cost B$10,000 x 1.2
 **Milestone billing.** Billing the client when a defined stage of work is done ("demolition and rough-in complete"), rather than by the calendar.
 Why it matters: you bill ahead of or matching your spending, so you never finance the job.
 
+**Ministry of Public Works.** The ministry that houses Building Control and the Director of Public Works. Source for the Building Code and amendments, and for news on the Construction Contractors Board.
+
 **Minimum job charge.** The lowest price you will do any job for, because every job takes time to sell, schedule and manage. `06-money.md` example: B$350 to B$500.
 
 **Minimum wage.** B$260 a week, B$6.50 an hour, since January 2023. Confirm no later change with the Department of Labour.
@@ -616,6 +634,10 @@ Why it matters: many rights exist only if you give notice on time and in writing
 ---
 
 ## O
+
+**Official Gazette.** The government publication where new laws, regulations and official appointments (such as the Construction Contractors Board) are announced.
+
+**OPM Young Entrepreneurs Academy.** A youth programme linked to the Office of the Prime Minister offering training and funding for young business owners. Check what is running now.
 
 **Overhead.** What the business costs whether or not you have a job: phone, vehicle, fuel, insurance, licences, software, accounting, marketing, office, your own salary.
 Example: B$2,000 a month = B$24,000 a year. It must be paid out of gross profit.
@@ -737,6 +759,9 @@ Why it matters: with no lien law, stopping work is your main lever.
 **Rolling 12-month turnover.** Your total taxable sales for the last 12 months, recalculated every month.
 Why it matters: VAT registration is mandatory once it passes B$100,000. Check it monthly. See **VAT registration threshold** for a worked example.
 
+**Rough opening.** The opening left in the block wall for a window or door, sized to the product you will install plus the fitting gap the manufacturer specifies.
+Why it matters: impact windows are made to size and take 8 to 16 weeks. Measure the actual openings and confirm sizes in writing before you order.
+
 **Rough-in.** Installing the pipes, wires, boxes, ducts and drains inside walls, floors and ceilings before they are closed up. Inspected before it is covered.
 
 ---
@@ -749,6 +774,8 @@ Why it matters: VAT registration is mandatory once it passes B$100,000. Check it
 
 **Scope of work.** The written description of exactly what you will do, line by line, to what standard, tied to drawings.
 Why it matters: scope you did not write down is scope you do for free.
+
+**Screed, float, trowel.** The three stages of finishing a slab. Screed: drag a straight board across the forms to strike the concrete level. Float: work the surface to push stones down and bring up a smooth paste. Trowel: steel-finish to the smoothness specified.
 
 **Selections.** The client's choices of finishes: tile, fixtures, paint colours, cabinets. Each has a deadline in the schedule. Late selections extend time, in writing.
 
@@ -787,6 +814,8 @@ Example: plan area 1,500 sq ft x 1.2 (about an 8 in 12 pitch) = 1,800 sq ft of r
 **Slump.** A measure of how wet and runny fresh concrete is. A cone is filled with concrete and lifted off; how far the pile sinks, in inches, is the slump. The specified slump is on the drawings or the mix order.
 Why it matters: drivers and crews add water to raise the slump and make concrete easier to place. Extra water weakens it. No water added without your OK.
 
+**Small works contract.** Your owner contract template for small jobs: `consultant/templates/owner-contract-small-works.md`. For jobs over about B$250,000 the template says to use a full standard form (JCT or FIDIC) reviewed by your attorney.
+
 **Snag list.** See **punch list**.
 
 **Soak-away.** A pit filled with rock, or a perforated chamber, that lets water soak into the ground: septic effluent or roof and yard drainage. Distances from wells per health rules.
@@ -819,6 +848,8 @@ Why it matters: it is the first weather skin on a block wall. Cracked or thin st
 Example: window submittal: product approval, sizes, glass, frame colour, anchoring. Approved in writing before you order. Nobody can say "that's not what I wanted" when it lands 12 weeks later.
 
 **Superintendent (super).** The person running the site day to day: safety, quality, schedule, subs, daily records. Priorities every day: safety, quality, schedule, cost. At the start you are both PM and super.
+
+**Supreme Court.** The Bahamian court for larger civil claims, including unpaid contract sums. Your attorney advises which court fits the size of the claim.
 
 **Supplier registry.** The government's list of registered suppliers and contractors, joined through the eProcurement portal.
 
@@ -917,6 +948,10 @@ Why it matters: red flag. Negotiate it to a workable period.
 **Washed sand.** Sand washed to remove salt and clay. The only sand for concrete, mortar and stucco. Never beach sand.
 
 **Waste factor.** An extra percentage added to quantities for cutting, breakage and spillage. Examples: block 5%, concrete 5% to 10%, tile 10% to 15%, drywall 10%.
+
+**Waterproof membrane.** A liquid-applied or sheet layer under tile in showers and other wet areas that stops water reaching the wall or floor behind. Flood tested before tile goes on.
+
+**Wet areas.** Showers, bathrooms, laundries, and anywhere else water is used or splashed. They get waterproofing and moisture-resistant board.
 
 **Water & Sewerage.** The Water and Sewerage Corporation, the public water and sewer utility. Connection after final sign-offs.
 

@@ -1,5 +1,7 @@
 # Small Works Construction Agreement
 
+Rev 1 · 2026-11-04
+
 Template. Fill every `[ ]`. Delete clauses that don't apply. Have a Bahamian attorney review this template once before first use. For jobs over about B$250,000, use a full standard form (JCT or FIDIC) reviewed by your attorney.
 
 ---
@@ -110,6 +112,7 @@ Items supplied by the Owner are the Owner's responsibility for timely delivery, 
 17.3 **Notices.** Notices must be in writing to the addresses above, or by email to [ ] / [ ], or by WhatsApp to [ ] / [ ]. A notice is received on the day sent if before 5 pm on a business day, otherwise the next business day.
 17.4 **Photos.** The Contractor may photograph the Works for records and, with the Owner's consent, marketing (no address shown).
 17.5 **Subcontracting.** The Contractor may subcontract parts of the Works and remains responsible for them.
+17.6 **Limit of liability.** The Contractor's total liability under or in connection with this Agreement is limited to [the Contract Price / B$[ ]]. The Contractor is not liable for loss of rent, profit or use, or other indirect loss. This does not limit liability for death or personal injury caused by negligence, or for fraud. [Attorney to confirm.]
 
 ---
 

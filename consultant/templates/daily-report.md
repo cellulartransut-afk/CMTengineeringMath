@@ -1,5 +1,7 @@
 # Daily Report
 
+Rev 1 · 2026-11-04
+
 **Project:** [ ] **Date:** [ ] **Report no.:** [ ] **Written by:** [ ]
 **Weather:** [sun / rain / wind], [temp] **Storm watch or warning:** [none / details]
 

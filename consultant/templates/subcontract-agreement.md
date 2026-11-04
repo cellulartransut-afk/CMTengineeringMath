@@ -1,5 +1,7 @@
 # Subcontract Agreement
 
+Rev 1 · 2026-11-04
+
 Template. Fill every `[ ]`. Have a Bahamian attorney review this template once, especially clause 5 (payment). Use one per sub per job.
 
 ---

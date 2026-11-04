@@ -43,7 +43,7 @@ Rev 1 · 2026-11-04
 
 | Stage | % | B$ | Due |
 |---|---|---|---|
-| Deposit on signing | [50]% | [ ] | On signing. We order materials and book your start when it clears. |
+| Deposit on signing | [40]% | [ ] | On signing. We order materials and book your start when it clears. |
 | [Progress, e.g. materials on site and old work removed] | [30]% | [ ] | Within [3] days of invoice |
 | Completion | [20]% | [ ] | Within [3] days of invoice |
 

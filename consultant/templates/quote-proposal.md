@@ -1,5 +1,7 @@
 # Proposal
 
+Rev 1 · 2026-11-04
+
 **[Your company name]** · [phone / WhatsApp] · [email] · Business licence [ ] · [VAT TIN / not VAT registered]
 
 **To:** [client name, address] **Date:** [ ] **Proposal no.:** [ ]

@@ -1,5 +1,7 @@
 # Checklists
 
+Rev 1 · 2026-11-04
+
 ## 1. Vet a new client before you quote
 
 - [ ] Who owns the property? (Ask. For new builds, ask to see the conveyance or survey.)
