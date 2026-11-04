@@ -33,6 +33,8 @@ The Subcontractor will not start until it has given the Contractor:
 (d) a list of its crew, with confirmation that every person is a Bahamian citizen, permanent resident, or holds a valid work permit or other permission to work in The Bahamas;
 (e) [trade licence for electrical or plumbing work, if applicable].
 
+4.2 The Subcontractor will keep every document in clause 4 current for the whole Subcontract and give the Contractor each renewed copy before the old one expires. While any document is expired or missing, the Contractor may hold payment until a current copy is given, and may stop the Subcontractor working on Site. [Attorney to confirm wording.]
+
 ## 5. Payment
 5.1 The Subcontractor will invoice [weekly / at these stages: [ ]] for work completed and accepted by the Contractor.
 5.2 The Contractor will pay each accepted invoice, less retention, within [7] days after the Contractor receives payment from the Owner for that work. If the Owner withholds payment for a reason caused by the Contractor, or for a reason unrelated to the Subcontract Works, the Contractor will still pay within [30] days of the invoice. [Attorney to settle final wording.]

@@ -126,7 +126,7 @@ After about 10 jobs, most of your estimate prices come from this sheet, and your
 
 ## 3. `job-cost-tracker.xlsx`: is this job making money? (one copy per job)
 
-**Make a copy for each job**, named like `2026-001 Smith Bathroom.xlsx`, and save it in that job's folder.
+**Make a copy for each job**, named like `2026-001 job-cost-tracker.xlsx`, and save it in the root of that job's folder (SOP-15).
 
 **The core idea, in four words:**
 - **Budget:** what you planned to spend, from your estimate.
@@ -165,7 +165,7 @@ The **Results** section updates itself. Read it every Friday:
 **Why forecast is never less than committed:** if you've signed a B$1,650 plumbing subcontract, that line will cost at least B$1,650, whatever you type as cost to complete.
 
 ### Sheet: Commitments
-Every purchase order (PO-001, PO-002...) and subcontract (SC-001, SC-002...) the day you sign it: date, who, type, code, description, amount.
+Every purchase order (2026-001-PO-01, -PO-02...) and subcontract (2026-001-SC-01, -SC-02...) the day you sign it: date, who, type, code, description, amount.
 
 "Invoiced to date" fills in from Actual Costs (match the commitment number). "Remaining" is what's left to pay on it.
 
@@ -222,7 +222,7 @@ Put inspections and deliveries on their own rows. They're the things that hold t
 Business name, the first month you track (type the first day of that month), VAT threshold (B$100,000), the warning level, how many months of overhead you keep in reserve, how old a sub's NIB letter can be, how many days before you follow up a quote, and whether you're VAT registered.
 
 ### Sheet: Leads & Quotes
-**A lead** is anyone who might hire you. Log every one the day they contact you, even small jobs: date, name, phone, **source** (how they found you), area, job type, site visit date, quote number, quote date, amount, status, next follow-up.
+**A lead** is anyone who might hire you. Log every one the day they contact you, even small jobs: date, name, phone, **source** (how they found you), area, job type, site visit date, job number (given when the site visit is booked, SOP-01), quote date, amount, status (New, Site visit booked, Quoted, Won, Lost, Dead, Closed), next follow-up. Mark a job Closed when its 12-month warranty ends (SOP-13).
 
 The **Action** column says FOLLOW UP when a quote has waited 5 days (change this in Settings) or the follow-up date has arrived. Most jobs go to the contractor who follows up, not the cheapest one.
 
@@ -251,7 +251,7 @@ It works out gross profit, total overhead, **net profit**, and whether your cash
 ### Sheet: VAT Threshold
 Pulls revenue from Monthly Money and adds up every **rolling 12 months**: this month plus the 11 before it. That's how the B$100,000 VAT registration test works.
 
-Status says "Getting close" at 80% and "OVER THRESHOLD: register now" above B$100,000. Confirm the exact test and timing with the Department of Inland Revenue.
+Status says "Getting close" at 75% (B$75,000: book your accountant, per SOP-14) and "OVER THRESHOLD: register now" above B$100,000. Confirm the exact test and timing with the Department of Inland Revenue.
 
 **Why it matters:** if you pass the threshold and don't register, you can end up owing VAT you never charged. That comes straight out of your profit.
 

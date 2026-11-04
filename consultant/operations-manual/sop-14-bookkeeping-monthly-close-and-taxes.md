@@ -37,9 +37,9 @@ Rev 1 · 2026-11-04 · Process owner: Office Admin (the owner until hired; the a
    - Sub documents expiring in the next 30 days chased (Subs & Documents).
    - Owner paid the fixed salary only. No extra draws until reserves are full.
 6. If an employer: file the NIB return and pay by the 15th.
-7. If VAT registered: file the VAT return and pay by the due date Inland Revenue set at your registration.
+7. If VAT registered: file the VAT return online and pay within 21 days of the end of each period (quarterly under B$5M turnover; reported, see 02-bahamas-rules.md section 4). File a nil return if you had no sales. Confirm your period at registration.
 8. Pay your own self-employed NIB at the rate NIB gives you.
-9. Yearly: renew the business licence with Inland Revenue by its due date, declaring last year's turnover; pay the company's annual government fee to the Registrar General; renew insurance; get the NIB letter of good standing and Tax Compliance Certificate if bidding government work; in Freeport, renew the GBPA licence too. Give the accountant the year's books within 60 days of year end.
+9. Yearly: renew the business licence with Inland Revenue, declaring last year's turnover (return reported due by 31 January, tax by 31 March; confirm each year, see 02-bahamas-rules.md section 3); pay the company's annual government fee to the Registrar General; renew insurance; get the NIB letter of good standing and Tax Compliance Certificate if bidding government work; in Freeport, renew the GBPA licence too. Give the accountant the year's books within 60 days of year end.
 10. Put every filing and renewal date in the calendar with a 60-day reminder.
 
 **Done when:** The month is closed by the 10th, the tax account covers every tax owed, and every return due that month is filed and paid.

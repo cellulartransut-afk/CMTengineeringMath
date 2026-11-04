@@ -16,7 +16,7 @@ Rev 1 · 2026-11-04 · Process owner: Office Admin (the owner until hired; the o
 1. Get the sub's invoice for the stages in their subcontract. No invoice, no payment.
 2. Walk the work with the invoice in hand. Pay only for work done and accepted. List defects in writing; defective work is not paid until fixed (clause 5.4).
 3. Check the Billing sheet: has the client paid us for that work? If yes, pay within 7 days of the client's payment (clause 5.2). If the client is holding payment because of our fault, or for reasons unrelated to this sub's work, pay within 30 days of the sub's invoice anyway.
-4. Check the sub's documents in Subs & Documents before every payment: business licence, NIB letter of good standing, insurance certificate, crew list. If any has expired, ask for the renewal and hold the payment until it arrives. Have your attorney confirm the subcontract wording supports the hold.
+4. Check the sub's documents in Subs & Documents before every payment: business licence, NIB letter of good standing, insurance certificate, crew list. If any has expired, ask for the renewal and hold the payment until it arrives (subcontract clause 4.2; have your attorney confirm the wording).
 5. Calculate the amount in the job's tracker (example below). Deduct a backcharge only after the written notice and 48 hours under clause 11.
 6. Approve: for now the owner approves every payment.
 7. Pay by bank transfer or business cheque, to the sub's business name. Never cash. Never pay a sub's workers directly.

@@ -1,6 +1,6 @@
 # 02. Bahamas rules: licensing, company, tax, NIB, permits, procurement, labour
 
-As of 2026-11-03. Rates and laws change. Every item says who confirms it. Sources are listed at the bottom. Where sources disagree or are secondary, it says so.
+As of 2026-11-04. Rates and laws change. Every item says who confirms it. Sources are listed at the bottom. Where sources disagree or are secondary, it says so.
 
 ## 1. Contractor licensing: Construction Contractors Act
 
@@ -49,6 +49,8 @@ As of 2026-11-03. Rates and laws change. Every item says who confirms it. Source
 
 - Freeport: you also need a Grand Bahama Port Authority business licence to trade in the Port area.
 
+- **Deadlines (reported):** the annual business licence return is due by **31 January**, with the tax payment deadline moved to **31 March** (Tribune Business). PwC's summary of the 2023 Act puts filing and payment on or before 31 March, and another guide says 31 March for both, so confirm the current year's dates. Reported penalties: B$100 for late filing, 10% of tax owed for late payment, plus interest on payments 30 or more days late.
+
 **Confirm with:** Department of Inland Revenue.
 
 ## 4. VAT
@@ -57,6 +59,7 @@ As of 2026-11-03. Rates and laws change. Every item says who confirms it. Source
 - **Mandatory registration** once your taxable supplies pass **B$100,000 in any 12 months**. You can register voluntarily below that.
 - Registered: you charge 10% on invoices, file returns, and claim back VAT you paid on materials and subs (input VAT), subject to the rules.
 - Not registered: you cannot charge VAT, and the VAT you pay on materials is a cost. Price it in.
+- **Filing (reported):** returns are filed online through Inland Revenue's Online Tax Administration (OTA) system. Quarterly if annual turnover is under B$5M, monthly at B$5M or more. Return and payment are due within 21 days of the end of the period. No extensions to pay. A nil return is still required for a period with no sales.
 - **Should you register early?** Yes if most clients are businesses or government (they want VAT invoices and can claim it back). Maybe not if most clients are homeowners (your price looks 10% higher than unregistered competitors). Track your rolling 12-month turnover every month so you register on time.
 - **2025 change for big projects.** The government moved to restrict input VAT claims on "major construction" (reported as projects of B$1M or more, and work like dredging, reclamation, docks and marinas), except where the business supplies real property as a taxable activity. The BCA argued the threshold is too low. Check the enacted text before pricing any job near B$1M.
 - **First-time homeowners (your clients).** A VAT rebate on construction services and materials for first-time homeowners exists (Section 55A, VAT Act; up to B$40,000 under the 2022 measures). The 2026/27 budget proposed extending first-time homeowner relief to duplexes through fourplexes with one owner-occupied unit and raising the real property tax exemption from B$500,000 to B$600,000. Tell qualifying clients about it; it helps them say yes.
@@ -146,4 +149,6 @@ As of 2026-11-03. Rates and laws change. Every item says who confirms it. Source
 - Permits and code: [GBPA building permits](https://gbpa.com/kb/what-do-i-have-to-turn-in-for-a-building-permit-and-where-do-i-turn-it-in/), [City of Freeport](https://cityoffreeport.org/construction-permits/), [Tribune 2025-10-16 code overhaul](https://www.tribune242.com/news/2025/oct/16/sweeting-tables-bill-expected-to-begin-overhaul-of-building-code), [EWNews code revision](https://ewnews.com/revisions-to-bahamas-building-code-near-completion-full-implementation-expected-by-q3-2025/)
 - Procurement: [US Commercial Service, selling to the public sector](https://www.trade.gov/country-commercial-guides/bahamas-selling-public-sector), [EWNews PM outlines changes](https://ewnews.com/expanding-opportunity-pm-outlines-changes-to-public-procurement)
 - Funding: [Access Accelerator grants](https://ewnews.com/?p=82137), [BDB and UN Women programme](https://caribbean.unwomen.org/en/stories/news/2024/08/bahamas-development-bank-and-un-women-launch-2m-low-interest-programme), [OPM small business](https://opm.gov.bs/small-business-entrepreneurship/)
+- VAT filing: [Deloitte Bahamas highlights 2026](https://www.deloitte.com/content/dam/assets-shared/docs/services/tax/2026/dttl-tax-bahamashighlights-2026.pdf), [Tribune 2014, filing frequency tied to sales](https://tribune242.com/news/2014/jul/21/vat-filing-frequency-tied-to-annual-sales)
+- Business licence deadlines: [Tribune Business Feb 2025](https://issuu.com/thetribune242/docs/02032025_business), [PwC on the 2023 Act](https://www.pwc.com/bs/en/services/tax/pdf/new-business-licence-act-2023.pdf), [Chambers](https://chambers.com/articles/the-bahamas-new-business-licence-act-2023-2)
 - Liens: [Tribune 2015, no lien law](https://tribune242.com/news/2015/nov/16/contractors-lien-law-absence-puts-us-great-disadva), [Tribune 2017, lien bill](https://tribune242.com/news/2017/jun/23/contractor-lien-bill-essential-closing-protective-)
