@@ -150,7 +150,7 @@ The **Results** section updates itself. Read it every Friday:
 | Cash position on this job | Paid by client minus costs you've paid. **Negative = you're financing the job** |
 | Billing check | Warns if you've spent more of the cost than you've billed. Send an invoice |
 
-**Example:** forecast cost B$9,302.50 against a revised price of B$11,895, so the forecast margin is 21.8% against 22% at bid. Cash position is +B$750, so the job is paying for itself. One invoice is late.
+**Example:** forecast cost B$9,302.50 against a revised price of B$11,895, so the forecast margin is 21.8% against 22% at bid. Cash position is +B$1,270 (the client has paid the deposit and change order CO-01; you've paid out B$3,800), so the job is paying for itself. One invoice is late.
 
 ### Sheet: Budget & Cost Report
 1. One line per cost code on the job. Type the code; the name fills in.
