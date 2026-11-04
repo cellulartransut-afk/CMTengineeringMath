@@ -49,12 +49,13 @@ Goal: be legal, set up, learning, with a sub bench and your first small jobs.
 | 1 | Pick a name. Check it is free at the Registrar General. Decide sole trader or company (see `02-bahamas-rules.md`; company recommended before any job over about B$25,000). |
 | 1 to 2 | Register the business. Apply for the business licence with Inland Revenue. Open a business-only bank account. |
 | 2 | Business phone with WhatsApp Business, business email, simple logo, Google Business Profile, Facebook and Instagram page. |
+| 2 to 4 | Get public liability insurance quotes from two brokers and have cover in place before your first job (see `06-money.md`). |
 | 2 to 6 | Build the sub bench: two subs per trade. Visit their current jobs before you hire them. Collect business licence, NIB good standing, insurance. Log them in `my-business/subs.md`. |
 | 2 to 12 | Get on a site: helper, assistant to a super, weekends or holidays. Watch block, rebar, concrete, roofing, finishes. Ask why. |
 | 4 to 12 | First jobs, B$500 to B$10,000: painting, repairs, doors and windows, fencing, small bathrooms, make-ready for rentals. Use the contract templates every time, even for family. |
-| 8 to 12 | Join the Bahamian Contractors Association. Get public liability insurance quotes. Set up job costing. |
+| 8 to 12 | Join the Bahamian Contractors Association. Set up job costing (`tools/job-cost-tracker.xlsx`, `07-cost-codes.md`). |
 
-**Gate to Stage 1:** registered and licensed, business bank account, 5 jobs completed and paid, written contract on every job, 6+ trades on the bench with documents.
+**Gate to Stage 1:** registered and licensed, public liability insurance in force, business bank account, 5 jobs completed and paid, written contract on every job, 6+ trades on the bench with documents.
 
 ### Stage 1. Paper contractor, small renovation and maintenance (year 1 to 2)
 

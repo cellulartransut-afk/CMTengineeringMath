@@ -217,9 +217,9 @@ Why it matters: keep a licensing file for every job from job one: contract, perm
 **Contingency.** An amount in your estimate for things you cannot see or predict. 3% to 5% for clear scope; 10% to 15% for renovation with unknowns.
 Example: renovation direct cost B$20,000 x 10% = B$2,000. It is not extra profit. It is there for problems that are yours to absorb, not the client's.
 
-**Control joint.** A planned groove sawn or tooled into a slab or stucco so that shrinkage cracks happen in a straight line where you want them, not at random. Locations per the drawings.
-
 **Contractor / general contractor (GC).** The business that holds the contract with the client and is responsible for the whole job. A general contractor usually self-performs some work and manages subs for the rest. A paper contractor subs out all of it.
+
+**Control joint.** A planned groove sawn or tooled into a slab or stucco so that shrinkage cracks happen in a straight line where you want them, not at random. Locations per the drawings.
 
 **Conveyance.** The legal document that transfers ownership of land from one person to another. It shows who owns the property.
 Why it matters: on new builds, ask to see it (or the survey). The person signing your contract should own the land or have written authority from the owner.
@@ -230,8 +230,8 @@ Why it matters: this is what holds the wall in a hurricane. Hollow or half-fille
 **Cost book.** Your own record of what things really cost: item, unit, real cost, date, supplier, island.
 Why it matters: after 10 jobs your estimates come from your own data, not guesses. The biggest single estimating upgrade there is.
 
-**Cost code.** A number for a type of cost, so every bill on a job lands in the right bucket. Examples from `06-money.md`: 01 General conditions, 03 Concrete, 04 Masonry, 06 Carpentry, 09 Finishes, 15 Plumbing, 16 Electrical. Full list: `consultant/knowledge/07-cost-codes.md`.
-Example: the block delivery invoice is coded 04. At month end you see masonry spent B$7,200 against a B$6,500 budget, and you know exactly where money leaked.
+**Cost code.** A number for a type of cost, so every bill on a job lands in the right bucket. Written DD-NN plus a type letter: `04-10-M` is 8 inch block walls, material; `09-30-S` is tile by a sub. Divisions include 01 General Conditions, 03 Concrete, 04 Masonry, 06 Carpentry, 09 Finishes, 15 Plumbing and HVAC, 16 Electrical. Full list: `consultant/knowledge/07-cost-codes.md`.
+Example: the block delivery invoice is coded 04-10-M. At month end you see masonry spent B$7,200 against a B$6,500 budget, and you know exactly where money leaked.
 
 **Cost plus (cost plus fee).** A contract where the client pays your actual cost plus an agreed fee, fixed or a percentage. Open books: you must prove every cost.
 Example: cost B$50,000 + 15% fee = B$57,500. Low risk to you, but only for trusted clients.
@@ -288,9 +288,9 @@ Why it matters: for small unpaid sums it often works without going to court.
 **Demobilisation / remobilisation.** Packing up and leaving site (demob). Coming back and setting up again (remob). Both cost money.
 Why it matters: your contract lets you charge for them if the client causes a suspension.
 
-**Department of Inland Revenue (DIR).** The tax office. Handles business licences and VAT.
-
 **Department of Immigration.** Issues work permits and enforces the rules on who may work in The Bahamas.
+
+**Department of Inland Revenue (DIR).** The tax office. Handles business licences and VAT.
 
 **Department of Labour.** Handles employment law questions: minimum wage, hours, overtime, terms of employment, workplace safety.
 
