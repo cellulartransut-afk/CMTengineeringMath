@@ -41,7 +41,7 @@ Start [ ] days after deposit and permit (if required). Duration about [ ] workin
 12 months on our workmanship. Manufacturers' warranties on materials pass to you.
 
 ## Next step
-Sign below and pay the deposit. We then issue the full contract (Small Works Construction Agreement) for signature and book your start date.
+Sign below to accept. We then send the contract for signature (Short-Form Job Agreement for jobs up to about B$10,000, Small Works Construction Agreement above that; see contract-guide.md) with the deposit invoice. Your start date is booked when the contract is signed and the deposit clears.
 
 Accepted: Name [ ] Signature ____________ Date [ ]
 

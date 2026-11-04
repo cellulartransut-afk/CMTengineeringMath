@@ -45,7 +45,7 @@ Rev 1 · 2026-11-04
 |---|---|---|---|
 | Deposit on signing | [40]% | [ ] | On signing. We order materials and book your start when it clears. |
 | [Progress, e.g. materials on site and old work removed] | [30]% | [ ] | Within [3] days of invoice |
-| Completion | [20]% | [ ] | Within [3] days of invoice |
+| Completion | [30]% | [ ] | Within [3] days of invoice |
 
 Pay by [bank transfer to [bank, account name, account no.] / cheque payable to [ ]]. We give a receipt for every payment. Do not pay cash to our workers or subcontractors.
 

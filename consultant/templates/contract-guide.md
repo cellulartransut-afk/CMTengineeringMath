@@ -162,7 +162,7 @@ Never give something for nothing. Every concession buys you something back. Writ
 2. **Late payment interest** at [1.5]% per month, and the costs of recovery clause: enforceable as written?
 3. **Right to suspend** and the termination payments (Small Works 15.2, the 10% of unfinished balance): enforceable, or at risk of being struck out as a penalty?
 4. **Title to materials:** wording that lets you collect unbuilt materials from site without trespass or a fight.
-5. **Liability caps and exclusions** (Short-Form 12, T&M 13, Maintenance 12, and the new Small Works 17.6): valid against homeowners? Are the carve-outs right? Does any consumer protection rule limit them?
+5. **Liability caps and exclusions** (Short-Form 12, T&M 13, Maintenance 12, and the new Small Works 17.6): valid against homeowners? Are the carve-outs right? Does any consumer protection rule limit them? In Maintenance 12.1, do Work Order charges count as "fees paid" for the cap?
 6. **WhatsApp and email** as valid notice, valid change approval and valid cap approval; scanned and electronic signatures for owners abroad.
 7. **Deemed acceptance and auto-renewal:** timesheets accepted if not queried (T&M 5.4); automatic renewal and fee changes (Maintenance 1.3, 1.4).
 8. **Pay-when-paid** in the subcontract (clause 5.2): settle the final wording.

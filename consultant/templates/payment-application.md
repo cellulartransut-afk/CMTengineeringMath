@@ -23,7 +23,7 @@ Rev 1 · 2026-11-04
 | VAT [10% / n/a] | |
 | **Total due** | |
 
-**Due date:** [ ] ([5] days from invoice, per clause 4 of the Agreement). Overdue sums carry interest at [1.5]% per month.
+**Due date:** [ ] ([5] days from invoice, per the payment clause of your agreement: Small Works clause 4; Short-Form page 1 payment table; T&M clause 7.2; Maintenance clause 3.2). Overdue sums carry interest at [1.5]% per month.
 
 **Pay to:** [bank, account name, account no., branch] / cheque payable to [ ].
 
