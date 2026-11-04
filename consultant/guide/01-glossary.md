@@ -550,4 +550,391 @@ Why it matters: it makes you order, book and call before you need things, not on
 **Lump sum (fixed price).** One agreed price for a defined scope. You carry the risk of costs coming in higher.
 Why it matters: most of your work will be lump sum. It only works if the scope is written tightly.
 
-<!-- GLOSSARY-CONTINUE -->
+---
+
+## M
+
+**Mailboat.** Scheduled cargo and passenger boats from Potter's Cay in Nassau to the Family Islands.
+Why it matters: schedules depend on weather and the boat. Plan for delays, breakage and double handling.
+
+**Margin.** See **gross margin**. Not the same thing as markup.
+
+**Marine insurance.** Insurance on goods while they are being shipped. Part of the CIF value.
+
+**Markup.** The percentage added on top of cost to get the price.
+Formulas: margin = markup / (1 + markup). Markup = margin / (1 - margin). Price = cost / (1 - target margin).
+Example: to keep a 20% margin you must mark up 25%, not 20%. Cost B$10,000 x 1.25 = B$12,500; margin = 2,500 / 12,500 = 20%. Mark up only 20%: price B$12,000, margin 16.7%. Mixing up the two words cost you B$500.
+
+**Master schedule.** The full job schedule from start to handover. The look-ahead is cut from it.
+
+**Mediation.** A neutral person helps both sides reach a deal. The mediator does not decide. If there is no deal, you go to arbitration or court. Your template: talk first, then mediation in Nassau, then arbitration or the courts.
+
+**MEP.** Mechanical, electrical and plumbing: the building's services. In a house: AC (mechanical), wiring and power (electrical), water, drains and fixtures (plumbing).
+
+**Mesh (welded wire mesh).** Sheets of steel wire welded in a grid, used as slab reinforcement where the drawings allow it. Must sit up on chairs, not lie on the vapour barrier.
+
+**Milestone billing.** Billing the client when a defined stage of work is done ("demolition and rough-in complete"), rather than by the calendar.
+Why it matters: you bill ahead of or matching your spending, so you never finance the job.
+
+**Minimum job charge.** The lowest price you will do any job for, because every job takes time to sell, schedule and manage. `06-money.md` example: B$350 to B$500.
+
+**Minimum wage.** B$260 a week, B$6.50 an hour, since January 2023. Confirm no later change with the Department of Labour.
+
+**Mobilisation.** Getting set up on site at the start: moving in people, tools, toilet, skip bin, first materials, protection. It costs money before any work is done, so the deposit must cover it.
+
+**Moisture-resistant board.** Drywall made to resist damp, for bathrooms, kitchens and laundries. It is not waterproof by itself; showers still need a waterproof membrane.
+
+**Mortar.** A mix of cement, sand (sometimes lime) and water used to bed and bond blocks. Joints should be full.
+
+**Mould.** Fungus that grows in damp. Prevented by waterproofing, ventilation, proper AC sizing and drainage.
+
+---
+
+## N
+
+**Named storm.** A tropical storm or hurricane given a name by forecasters. Many insurance policies treat named storm damage separately, with its own deductible or an exclusion.
+Why it matters: "Is named storm covered, and what is the deductible?" is the first question on any CAR policy.
+
+**Near miss.** An incident where nobody got hurt but could have. A block falls off the scaffold and misses a worker.
+Why it matters: record it and fix the cause. Next time it hits someone.
+
+**Net profit.** Gross profit minus overhead. What grows the company. Target 8% or more for small work.
+Example: revenue B$250,000 at 24% margin = B$60,000 gross profit. Overhead (including your salary) B$40,000. Net profit B$20,000 = 8%.
+
+**Net yield.** Yearly net income from an asset divided by what you invested in it.
+Example from `06-money.md`: B$15,120 net rent / B$220,000 invested = 6.9%.
+
+**NIB (National Insurance Board).** The Bahamian social security system. Employers and employees contribute on wages. As of 2026-11-03: employer 6.65%, employee 4.65%, total 11.3% of wages up to B$810 a week. Monthly returns and payments due by the 15th; late penalty reported at 5% a month. Self-employed people contribute too (check your own rate with NIB). New rates were expected from 1 July 2026; confirm with NIB.
+Example: employee paid B$500 a week. Employer pays 6.65% = B$33.25. Employee's 4.65% = B$23.25 is deducted from their pay. Total to NIB: B$56.50 for that week.
+
+**No damages for delay.** A clause saying you get extra time for client-caused delay, but no money.
+Why it matters: you keep paying crew, equipment and overhead while the client holds you up. Red flag: negotiate it out or price it.
+
+**Notice.** A formal written message under the contract: delay notice, payment demand, defect notice, termination. The contract says how notices are sent and when they count as received. Your template accepts email and WhatsApp.
+Why it matters: many rights exist only if you give notice on time and in writing.
+
+---
+
+## O
+
+**Overhead.** What the business costs whether or not you have a job: phone, vehicle, fuel, insurance, licences, software, accounting, marketing, office, your own salary.
+Example: B$2,000 a month = B$24,000 a year. It must be paid out of gross profit.
+
+**Overhead percentage.** Yearly overhead divided by yearly revenue.
+Example: B$40,000 / B$250,000 = 16%.
+
+**Overtime.** Reported at 1.5 times pay after 40 hours a week or 8 hours a day; public holidays and rest days at 2 times (Employment Act, 2001). Confirm with the Department of Labour.
+
+**Owner-builder.** A person who builds on their own property and manages it themselves. A planned licensing category under the Act.
+
+**Owner's representative.** Someone the owner pays to watch their contractor and protect their interests. Common for owners abroad building on Family Islands. A future service business in your roadmap.
+
+**Owner-supplied items.** Materials or equipment the client buys and hands you to install.
+Why it matters: you warrant the installation, not the item. Late or defective owner items extend your time. Put that in writing.
+
+**OSB (oriented strand board).** Sheets made of wood strands glued under pressure. Used like plywood for roof sheathing where the drawings allow it.
+
+---
+
+## P
+
+**Paper contractor.** A contractor who holds the contract with the client and manages subs who do all the physical work. You sell management: getting work, pricing, contracts, picking and controlling subs, protecting cash, delivering quality on time.
+Why it matters: you carry the liability for every sub's work and safety, even if you never touch a tool.
+
+**Parties.** The people or companies who sign a contract. Use full legal names and addresses. You sue a legal person, not a nickname.
+
+**Pay-when-paid / pay-if-paid.** Pay-when-paid: you pay the sub within a set time after the client pays you for their work. It is about timing. Pay-if-paid: you pay the sub only if the client pays you at all. It moves the risk of a non-paying client onto the sub. The UK outlawed these by statute; The Bahamas has no equivalent statute, and courts read such clauses strictly.
+Why it matters: your subcontract uses pay-when-paid with a 30-day backstop when the client withholds for a reason that is not the sub's fault. Have your attorney settle the wording. When someone gives you a contract with pay-if-paid and no time limit, you might never be paid.
+
+**Payback (equipment).** How many months equipment takes to earn back what it cost.
+Formula: purchase price / (monthly rental income - monthly running, maintenance and insurance).
+Example (illustration): mixer B$4,800, earns B$400 a month in rental, costs B$100 a month to run: 4,800 / 300 = 16 months. Under 24 months with steady demand is a good buy.
+
+**Payment application (pay app).** Your invoice for a stage or period, showing contract value, percent complete, earned to date, previously billed, retention and amount due. Template: `consultant/templates/payment-application.md`.
+Example: stage worth B$10,000, 100% done, client holds 5% retention (B$500). Due B$9,500, plus VAT if you are registered.
+
+**Per diem.** A daily allowance paid to workers away from home for food and expenses, mostly on Family Island jobs.
+
+**Performance bond.** A guarantee from a bank or insurer that pays the client, often up to 10% of the contract value, if you fail to finish.
+Example: B$400,000 contract, 10% bond = B$40,000. The bank will want cash collateral or a credit facility behind it.
+
+**Permit.** See **building permit**.
+
+**Personal guarantee.** Your personal promise to repay a company debt if the company cannot.
+Why it matters: even with a company, banks ask for one on loans. Your personal savings and property are then on the line for that loan.
+
+**Plumb, level, line.** Plumb: perfectly vertical. Level: perfectly horizontal. Line: straight along its length. Checked with a spirit level, plumb bob or laser, and a string line.
+
+**Potter's Cay.** The dock in Nassau, under the Paradise Island bridge, where mailboats load for the Family Islands.
+
+**PPE (personal protective equipment).** Hard hat, safety boots, gloves, eye protection, hearing protection for cutting, harness for work at height.
+
+**Practical completion.** The point when the work is finished except for minor items that do not stop the client using it. It triggers the completion payment, starts the defects period, and starts the punch list.
+
+**Pre-start meeting.** The meeting with each sub before they start: scope, drawings, schedule, crew size, site rules, quality standard, how they get paid.
+
+**Pressure-treated lumber.** Wood treated with chemicals under pressure to resist rot and termites. Use where specified, especially near the ground or against masonry. Even treated, no wood in contact with soil.
+
+**Price gouging.** Raising prices unfairly after a disaster because people are desperate. Don't. Pass on real cost increases with proof, at your normal margin. Your reputation lasts longer than the storm.
+
+**Product approval.** The test document for a window, door, shutter or roofing product showing its wind and impact rating and exactly how it must be installed and anchored. Many products sold from Florida carry Florida or Miami-Dade approvals. Ask Building Control which approvals it accepts.
+
+**Professional indemnity insurance.** Insurance against claims from design mistakes. Needed only if you do design-build.
+
+**Project manager (PM).** The person who runs the contract side of a job: scope, changes, money, schedule, client, documents. The super runs the site. At the start you are both.
+
+**Public liability insurance (general liability).** Insurance against claims for injury or damage to other people caused by your work: the neighbour's car, a passer-by, the client's furniture.
+Why it matters: buy it before your first job. Require every sub to carry it and name you on the certificate.
+
+**Public Procurement Act, 2023.** The law on how government buys goods and works. It allows preferences for small, women-owned, youth-owned and Family Island businesses; the margin is set in each tender document.
+
+**Pump (concrete pump).** A truck or trailer that pumps concrete through a hose to where it is needed, when the mixer truck cannot reach.
+
+**Punch list (snag list).** The list of small items still to fix or finish at the end of the job, walked with the client and signed off item by item.
+Example: "Master bath: re-caulk tub, touch up paint by door, adjust closet door." Your template: punch items finished within 10 working days.
+
+**Purchase order (PO).** A written order you send a supplier: items, quantity, price, delivery date and address, payment terms, job and cost code.
+Why it matters: it locks the price, records your committed cost, and settles arguments about what you ordered.
+
+---
+
+## R
+
+**Rafter.** A sloping roof beam cut and built on site. Trusses are factory-made; rafters are built by the carpenter on site. Both need straps.
+
+**Ready-mix.** Concrete batched at a plant and delivered in a mixer truck, with a delivery ticket showing the mix.
+
+**Real property tax.** Annual tax on property you own. Applies to your rental assets later.
+
+**Rebar (reinforcing bar).** Ribbed steel bars cast inside concrete to carry tension. Concrete is strong when squeezed but cracks when pulled; the steel takes the pull.
+
+**Reconcile (bank reconciliation).** Matching every line on the bank statement with your own records each month, so your books match the bank.
+Why it matters: it catches missed invoices, double payments and fraud.
+
+**Registered agent.** A licensed firm that forms and maintains companies for clients and files with the Registrar General.
+
+**Registrar General's Department.** The government office that registers business names and companies.
+
+**Release agent (form oil).** Oil or coating brushed on formwork so concrete does not stick to it.
+
+**Render.** See **stucco / render**.
+
+**Retention.** A percentage held back from each payment until the work is accepted and the defects period ends. You hold 10% from subs. A client may hold 5% to 10% from you.
+Example: sub invoice B$5,000. You pay B$4,500 and hold B$500. Half (B$250) released at practical completion, half at the end of the defects period if defects are fixed.
+
+**RFI (request for information).** A written question to the designer or client when the drawings are unclear, missing something, or contradict each other. Numbered, dated, answered in writing.
+Example: "RFI 03: Drawing S2 shows #5 bars in the tie beam; detail 4 shows #4. Which governs?" Never guess on structure.
+
+**Right to suspend.** The contract clause that lets you stop work if the client does not pay. Your template: sum unpaid 7 days after due date, then 3 days' written notice.
+Why it matters: with no lien law, stopping work is your main lever.
+
+**Ring beam.** See **tie beam (belt course, ring beam)**.
+
+**Ring-shank nail.** A nail with rings around the shank that grip the wood. Much harder to pull out than a smooth nail. Used for roof sheathing and strap connections where drawn.
+
+**Rodding.** Pushing a steel rod up and down in fresh core fill or concrete to work out air pockets. A vibrator does the same job better.
+
+**Rolling 12-month turnover.** Your total taxable sales for the last 12 months, recalculated every month.
+Why it matters: VAT registration is mandatory once it passes B$100,000. Check it monthly. See **VAT registration threshold** for a worked example.
+
+**Rough-in.** Installing the pipes, wires, boxes, ducts and drains inside walls, floors and ceilings before they are closed up. Inspected before it is covered.
+
+---
+
+## S
+
+**Scaffold.** A temporary working platform. Must stand on a firm base, be braced, fully planked, with guardrails.
+
+**Schedule A and Schedule B.** In your owner contract, Schedule A is the Scope of Works and Schedule B is the Exclusions. Both are part of the contract.
+
+**Scope of work.** The written description of exactly what you will do, line by line, to what standard, tied to drawings.
+Why it matters: scope you did not write down is scope you do for free.
+
+**Selections.** The client's choices of finishes: tile, fixtures, paint colours, cabinets. Each has a deadline in the schedule. Late selections extend time, in writing.
+
+**Self-perform.** Doing a trade with your own employed crew instead of a sub. Stage 2 in your roadmap. Captures the sub's margin and gives you control of the schedule.
+
+**Septic tank.** An underground tank where household sewage settles and breaks down. The liquid flows on to a soak-away or drain field. Distances from wells are set by health rules.
+
+**Setbacks.** The minimum distance a building must be from the property lines (front, sides, back), set by Town Planning.
+Why it matters: a wall built 2 feet into the setback can mean refusal, a fight with the neighbour, or demolition.
+
+**Setting out (set out).** Marking on the ground exactly where the building goes, using pegs, batter boards, string lines and levels, measured from the boundary pegs and the site plan.
+Example check: a 30 x 40 ft rectangle has diagonals of exactly 50 ft (the 3-4-5 triangle). If the two diagonals differ, the building is not square.
+
+**Sheathing.** Plywood or OSB sheets nailed over the trusses to form the roof deck. Nailing pattern at the edges and in the field (the middle of the sheet) per the drawing.
+
+**Shingles / square.** Asphalt shingles are a common roofing. Roofing is measured in "squares": 1 square = 100 sq ft.
+Example: 1,800 sq ft of roof / 100 = 18 squares, + 12% for hips, valleys and waste = 20.2. Order 21 squares.
+
+**Shoring.** Temporary support: props under formwork and beams, or supports holding back trench sides.
+Why it matters: trenches over 5 feet deep must be shored or sloped. Nobody goes in an unsupported trench.
+
+**Shop drawing.** A detailed drawing made by a supplier or sub (truss layout, window schedule, cabinet layout) showing exactly how they will make or fit their product. Submitted for approval before fabrication.
+
+**Site plan.** A drawing of the lot showing the building position, setbacks, drive and septic. Your own site plan adds deliveries, storage, skip bin, toilet, parking and security.
+
+**Skip bin.** A large steel container dropped on site for debris, then collected and emptied by the hire company.
+Why it matters: skip hire and dump fees are general conditions. Price them.
+
+**Slab (slab on grade).** The concrete floor poured on compacted fill inside the stem walls.
+
+**Sleeve.** A piece of pipe set through a slab, beam or wall before the pour so a pipe or cable can pass through later without cutting concrete.
+
+**Slope factor.** A multiplier that turns a roof's plan (flat, as seen from above) area into its real sloped area. Steeper roofs have bigger factors.
+Example: plan area 1,500 sq ft x 1.2 (about an 8 in 12 pitch) = 1,800 sq ft of roof. Get the factor for your pitch from a table or the drawings.
+
+**Slump.** A measure of how wet and runny fresh concrete is. A cone is filled with concrete and lifted off; how far the pile sinks, in inches, is the slump. The specified slump is on the drawings or the mix order.
+Why it matters: drivers and crews add water to raise the slump and make concrete easier to place. Extra water weakens it. No water added without your OK.
+
+**Snag list.** See **punch list**.
+
+**Soak-away.** A pit filled with rock, or a perforated chamber, that lets water soak into the ground: septic effluent or roof and yard drainage. Distances from wells per health rules.
+
+**Soil treatment (termite treatment).** A termite poison applied to the soil before the slab is poured, by a pest control company. Get a written record of what was applied and when.
+
+**Sole trader.** You trading in your own name or a registered business name. You and the business are the same legal person, so business debts and claims are yours personally.
+
+**Spalling.** Concrete breaking off in flakes or chunks because the rebar inside rusted and swelled. Caused by low cover, beach sand, or cracks letting salt water in.
+
+**Specifications (specs).** The written part of the design: materials, products, standards, workmanship, testing. Drawings show where and how big; specs say what and how good.
+
+**Stamp duty.** A tax on property transfers and some documents.
+
+**Stamped drawings.** Drawings sealed and signed by a qualified architect or engineer who takes professional responsibility for the design.
+Why it matters: structural sizes, rebar, beams, footings and connections come from stamped drawings. Never from you, your sub or a guess.
+
+**Stem wall.** The block wall from the footing up to slab level.
+
+**Stirrup.** A loop of smaller bar wrapped around the main bars of a beam (like the tie beam) at regular spacing. Holds the cage together and resists shear (the force trying to slice the beam).
+
+**String line.** Tight string between batter boards or pegs marking wall lines and heights.
+
+**Stucco / render.** A cement and sand plaster coat on block walls. Outside it is usually called stucco or render; inside, plaster. Applied in coats.
+Why it matters: it is the first weather skin on a block wall. Cracked or thin stucco lets water in.
+
+**Sub (subcontractor).** A separate business you hire to do part of the work for a price. They work under your subcontract, and you are responsible to the client for their work.
+
+**Submittal.** Product information, shop drawings or samples you send to the designer or client to approve before ordering or installing.
+Example: window submittal: product approval, sizes, glass, frame colour, anchoring. Approved in writing before you order. Nobody can say "that's not what I wanted" when it lands 12 weeks later.
+
+**Superintendent (super).** The person running the site day to day: safety, quality, schedule, subs, daily records. Priorities every day: safety, quality, schedule, cost. At the start you are both PM and super.
+
+**Supplier registry.** The government's list of registered suppliers and contractors, joined through the eProcurement portal.
+
+**Surety.** An insurance company that issues bonds (bid, performance, advance payment) for a contractor.
+
+**Survey / surveyor.** A licensed land surveyor measures and marks the property boundaries and produces a survey plan.
+Why it matters: for new work, get one. Setbacks are measured from the true boundary, not from the old fence.
+
+---
+
+## T
+
+**Takeoff (quantity takeoff).** Measuring quantities from the drawings or the site: cubic yards of concrete, number of blocks, square feet of tile. Show the math so it can be checked.
+
+**Tariff Act.** The law whose First Schedule sets the customs duty rate for each item.
+
+**Tax account.** A separate bank account where you move VAT collected, NIB and a business licence reserve every time you are paid. That money is not yours.
+
+**Tax Compliance Certificate.** A document showing your business is up to date with its taxes. Government tenders typically ask for one, alongside your business licence and NIB letter. Ask the Department of Inland Revenue how to get it and what must be current.
+
+**Termination.** Ending the contract early. Your template: allowed for a material breach not fixed within 10 days of written notice. It also says what gets paid on termination.
+
+**Termites.** Insects that eat wood. A constant threat here. The answers: soil treatment before the slab, treated lumber where specified, no wood touching soil.
+
+**Testimonial.** A short written statement from a satisfied client. For your marketing and licensing file.
+
+**Thinset.** Cement-based adhesive mortar used to stick tile.
+
+**Three-week look-ahead.** See **look-ahead schedule**.
+
+**Tie beam (belt course, ring beam).** Three names for the same thing: the reinforced concrete beam cast on top of the block walls, running all the way round the building. It ties the walls together and holds the hurricane straps that anchor the roof.
+Why it matters: it is the link between walls and roof. Straps must be set in it before the pour, at every truss position.
+
+**Time and materials (T&M).** A contract where the client pays your labour at agreed rates plus materials at cost plus markup. Use it with a cap: "not to exceed B$X without written approval".
+Example: labour B$45 an hour x 16 hours = B$720; materials B$400 + 20% = B$480; total B$1,200, under a B$1,500 cap. Good for repairs where you cannot see the problem until you open it up.
+
+**Title retention (title to materials).** A contract clause saying materials delivered to site stay your property until paid for, so you can take back what is not yet built in if the client does not pay.
+
+**Toolbox talk.** A 5-minute safety talk at the start of the day on one topic: ladders, heat, cutting, trenches. Write the topic in the daily report.
+
+**Town Planning / Building Control.** Two separate approvals. Town Planning (Department of Physical Planning) decides whether you may build that use, that size, in that place: zoning, use, setbacks, subdivision. Building Control (Ministry of Public Works) decides whether the design and construction are safe and to code: plan review, permit, stage inspections, certificate of occupancy.
+
+**Trade account.** A credit account with a supplier: you take materials now and pay by the agreed date, often 30 days.
+Why it matters: pay on time and it is free financing. Pay late and you lose it, and your name with it.
+
+**Trade credit.** The free financing you get from trade accounts.
+
+**Trade licence.** A licence a tradesperson needs to practise a regulated trade, mainly electricians and plumbers.
+
+**Truss.** A factory-made triangle frame of lumber joined with metal plates, designed by the truss maker's engineer. A row of trusses forms the roof frame. Lead time 2 to 6 weeks.
+
+**Turnover.** See **gross turnover**.
+
+---
+
+## U
+
+**Underlayment.** A waterproof layer (felt or synthetic) over the roof sheathing, under the shingles or metal. Laps run so water flows over each joint, not under it.
+
+**Unforeseen conditions.** Things you could not reasonably see or expect when you priced: rot, termite damage, mould, corroded steel, bad existing wiring or plumbing, rock, buried debris or services. Your contract prices them as a change.
+Example: opening a bathroom wall reveals a termite-eaten wall plate. Stop, photograph, notify the client, agree a change order (say B$850), then fix it.
+
+**Unit price.** A contract or rate priced per unit of work and paid on the measured quantity. You carry the productivity risk.
+Example (illustration): block laying at an agreed B$3.00 per block. 2,400 blocks measured = B$7,200. Your real rate comes from your sub quotes.
+
+**Utility connections.** Hooking the building up to BPL power, Water & Sewerage water and sewer, and cable. Done after the certificate of occupancy and sign-offs. Fees normally excluded from your price.
+
+---
+
+## V
+
+**Validity date.** How long your quote's price stands, often 30 days. It must match your suppliers' quote validity, or you need an escalation clause.
+
+**Vapour barrier.** A sheet of heavy plastic (polyethylene) laid under the slab over the compacted fill, thickness per the drawings or spec, laps overlapped and taped. It stops ground moisture rising through the slab into floors and finishes.
+Why it matters: a torn or missing barrier means damp floors, lifting tile and mould.
+
+**Variation.** The UK and JCT word for a change order. Your subcontract uses "variation" for changes to a sub's work.
+
+**VAT (value added tax).** A 10% tax on most goods and services (cut from 12% in 2022). Construction services are standard-rated. Confirm with the Department of Inland Revenue.
+
+**VAT registration threshold.** Registration is mandatory once your taxable supplies pass B$100,000 in any 12 months. You can register voluntarily below that.
+Example: your 12 months to end of January total B$92,000. In February you invoice B$15,000. Last February you invoiced B$5,000, which drops out of the window. New rolling total: 92,000 - 5,000 + 15,000 = B$102,000. You have passed B$100,000: register. Ask Inland Revenue how quickly you must register once you cross.
+
+**Vibrator (concrete vibrator, poker).** A tool with a vibrating head pushed into wet concrete to shake out air so it fills around the bars and into the corners.
+Why it matters: unvibrated concrete has voids (honeycombing) that weaken it and expose the steel.
+
+---
+
+## W
+
+**Waiver of claims.** A clause saying you lose your right to claim time or money if you do not give notice within a short period, sometimes 2 or 3 days.
+Why it matters: red flag. Negotiate it to a workable period.
+
+**Warranty.** Your promise to fix defects in your work for a set period. Your template: 12 months on workmanship from practical completion. Manufacturer warranties on products pass to the client. Excludes misuse, storms, work by others, and owner-supplied items.
+
+**Washed sand.** Sand washed to remove salt and clay. The only sand for concrete, mortar and stucco. Never beach sand.
+
+**Waste factor.** An extra percentage added to quantities for cutting, breakage and spillage. Examples: block 5%, concrete 5% to 10%, tile 10% to 15%, drywall 10%.
+
+**Water & Sewerage.** The Water and Sewerage Corporation, the public water and sewer utility. Connection after final sign-offs.
+
+**Wharfage.** A port charge on goods landed at the dock. Part of landed cost.
+
+**WIP (work in progress).** Jobs started but not finished. A WIP report compares, for each job, what you have earned (by percent complete) with what you have billed.
+Example: B$40,000 job, estimated total cost B$31,000, cost to date B$20,000. Percent complete = 20,000 / 31,000 = 64.5%. Earned = 64.5% x 40,000 = B$25,800.
+
+| Billed to date | Result | What it means |
+|---|---|---|
+| B$26,000 | On track (B$200 ahead) | Fine |
+| B$30,000 | Overbilled B$4,200 | You owe that much work. Do not spend that cash as profit. |
+| B$20,000 | Underbilled B$5,800 | You are financing the client. Invoice now. |
+
+**Win rate.** Quotes won divided by quotes sent. 25% to 40% is healthy. Much higher means you are too cheap. Much lower means too high, or the wrong clients.
+
+**Work permit.** Permission from the Department of Immigration for a non-Bahamian to work. Employing someone without permission is an offence. Check your own employees, require subs to certify their crews, and spot-check.
+
+**Working days.** Days work normally happens. Define it in the contract (your template's site hours are Monday to Saturday). "20 working days" on a six-day week is a little over three calendar weeks.
+
+**Workmanlike (good and workmanlike manner).** The legal standard that work is done with the skill and care of a competent tradesperson. It is in your owner contract.
